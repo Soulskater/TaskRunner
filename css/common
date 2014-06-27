@@ -1,0 +1,98 @@
+/*Fonts, colors*/
+@import "shared";
+
+body {
+ background-color: @light-grey;
+}
+
+.font-s {
+  font-family: @semibold-font;
+  font-size: 14px;
+}
+
+.font-m {
+  font-family: @light-font;
+  font-size: 2.1rem;
+}
+
+.font-l {
+  font-family: @light-font;
+  font-size: 2.5rem;
+  letter-spacing: 0.01em;
+}
+
+.font-xl {
+  font-family: @light-font;
+  font-size: 4.8rem;
+}
+
+.text-space{
+  &.s{
+    &.all{
+      padding: 5px;
+    }
+    &.top{
+      padding-top: 5px;
+    }
+    &.right{
+      padding-right: 5px;
+    }
+    &.bottom{
+      padding-bottom: 5px;
+    }
+    &.left{
+      padding-left: 5px;
+    }
+  }
+  &.m{
+    &.all{
+      padding: 10px;
+    }
+    &.top{
+      padding-top: 10px;
+    }
+    &.right{
+      padding-right: 10px;
+    }
+    &.bottom{
+      padding-bottom: 10px;
+    }
+    &.left{
+      padding-left: 10px;
+    }
+  }
+  &.l{
+    &.all{
+      padding: 15px;
+    }
+    &.top{
+      padding-top: 15px;
+    }
+    &.right{
+      padding-right: 15px;
+    }
+    &.bottom{
+      padding-bottom: 15px;
+    }
+    &.left{
+      padding-left: 15px;
+    }
+  }
+  &.xl{
+    &.all{
+      padding: 25px;
+    }
+    &.top{
+      padding-top: 25px;
+    }
+    &.right{
+      padding-right: 25px;
+    }
+    &.bottom{
+      padding-bottom: 25px;
+    }
+    &.left{
+      padding-left: 25px;
+    }
+  }
+}
