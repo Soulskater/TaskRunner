@@ -1,0 +1,16 @@
+/* region Item*/
+.item:hover .box {
+  stroke: #005EB8;
+}
+.item:hover .connector {
+  fill: #005EB8;
+}
+.item .box {
+  fill: #DBDBDB;
+  stroke-width: 1;
+  stroke: #3088db;
+}
+.item .connector {
+  fill: #3088db;
+}
+/* endregion Item*/

@@ -1,44 +1,50 @@
 <!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Cloud Runner</title>
-    <link href="css/bootstrap.css" type="text/css" rel="stylesheet">
-    <link href="css/common.css" type="text/css" rel="stylesheet">
-    <link href="css/site.css" type="text/css" rel="stylesheet">
-    <script src="js/jquery-2.1.1.js" type="text/javascript"></script>
-    <script src="js/angular.js" type="text/javascript"></script>
-    <script src="js/angular-sanitize.js" type="text/javascript"></script>
-    <script src="js/angular-animate.js" type="text/javascript"></script>
-    <script src="js/angular-animate.js" type="text/javascript"></script>
-    <script src="js/bootstrap.js" type="text/javascript"></script>
-</head>
-<body>
-<div class="header font-l text-space left xl">
-    Cloud Runner
-</div>
-<div class="page-wrapper">
-    <!--Menu-->
-    <div class="left-menu">
-        <ul class="">
-            <li class="font-m text-center text-space m all">
-                Menu Item 1
-            </li>
-            <li class="font-m text-center text-space m all">
-                Menu Item 2
-            </li>
-            <li class="font-m text-center text-space m all">
-                Menu Item 3
-            </li>
-            <li class="font-m text-center text-space m all">
-                Menu Item 4
-            </li>
-        </ul>
-    </div>
-    <!--Content-->
-    <div class="content">
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Task Runner</title>
+        <link href="css/bootstrap.css" type="text/css" rel="stylesheet">
+        <link href="css/common.css" type="text/css" rel="stylesheet">
+        <link href="css/site.css" type="text/css" rel="stylesheet">
+        <link href="css/editor.css" type="text/css" rel="stylesheet">
+        <script src="js/lib/jquery-2.1.1.js" type="text/javascript"></script>
+        <script src="js/lib/angular.js" type="text/javascript"></script>
+        <script src="js/lib/bootstrap.js" type="text/javascript"></script>
 
-    </div>
-</div>
-</body>
+        <script src="js/main.js" type="text/javascript"></script>
+        <script src="js/directives/svgDirective.js" type="text/javascript"></script>
+        <script src="js/directives/editor/editorDirective.js" type="text/javascript"></script>
+    </head>
+    <body ng-app="TaskManagement">
+        <div class="header font-l text-space left xl">
+            Task Runner
+        </div>
+        <div class="page-wrapper">
+            <!--Menu-->
+            <div class="left-menu">
+                <ul class="">
+                    <li class="font-m text-center text-space m all">
+                        Menu Item 1
+                    </li>
+                    <li class="font-m text-center text-space m all">
+                        Menu Item 2
+                    </li>
+                    <li class="font-m text-center text-space m all">
+                        Menu Item 3
+                    </li>
+                    <li class="font-m text-center text-space m all">
+                        Menu Item 4
+                    </li>
+                </ul>
+            </div>
+            <!--Content-->
+            <div class="content">
+                <h2>Editor</h2>
+                <editor width="500" height="500">
+                    <item width="200" height="100" x="150" y="150"></item>
+                </editor>
+            </div>
+        </div>
+
+    </body>
 </html>
