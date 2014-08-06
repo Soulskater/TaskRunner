@@ -1,28 +1,31 @@
 /* region Item*/
 .item {
 
-  &:hover {
+    &:hover {
+        .box {
+            stroke: #005EB8;
+        }
+        .connector {
+            fill: #005EB8;
+        }
+    }
+
     .box {
-      stroke: #005EB8;
+        fill: #DBDBDB;
+        stroke-width: 1;
+        stroke: #3088db;
     }
+
+    .box-header {
+        span {
+            color: #282828;
+        }
+        line-height: 21px;
+    }
+
     .connector {
-      fill: #005EB8;
+        fill: #3088db;
     }
-  }
-
-  .box {
-    fill: #DBDBDB;
-    stroke-width: 1;
-    stroke: #3088db;
-  }
-
-  .header {
-    fill: #282828;
-  }
-
-  .connector {
-    fill: #3088db;
-  }
 
 }
 

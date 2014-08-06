@@ -10,6 +10,12 @@
   stroke-width: 1;
   stroke: #3088db;
 }
+.item .box-header {
+  line-height: 21px;
+}
+.item .box-header span {
+  color: #282828;
+}
 .item .connector {
   fill: #3088db;
 }
