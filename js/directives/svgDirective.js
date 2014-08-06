@@ -26,11 +26,9 @@ angular.module('TaskManagement.Directive', [])
             }
         };
     }])
-    .directive('ngX', [function () {
+    .directive('ngX', ['$compile', function ($compile) {
         return{
             restrict: 'A',
-            replace: true,
-            scope: false,
             link: function ($scope, element, attrs) {
                 $scope.$watch(attrs.ngX, function (x) {
                     element.attr("x", x);

@@ -34,7 +34,8 @@ angular.module('TaskManagement.Directive.Editor', ['TaskManagement.Directive'])
                 width: "=",
                 height: "=",
                 x: "=",
-                y: "="
+                y: "=",
+                connections: '='
             },
             controller: 'itemController',
             link: function ($scope, element, attrs) {
