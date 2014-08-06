@@ -1,10 +1,13 @@
 <svg>
-    <g class="item">
+    <g class="item" ng-mousemove="x = x+1">
         <rect ng-width="width" ng-height="height" ng-x="x" ng-y="y"
               class="box" rx="2" ry="2">
         </rect>
         <circle r="5" class="connector" ng-cx="x" ng-cy="y+height/2"></circle>
-        <text ng-x="x+10" ng-y="y+25" class="font-m header" ng-transclude>
-        </text>
+        <foreignObject ng-x="x" ng-y="y" ng-width="width" ng-height="height">
+            <div class="text-space m left top" ng-transclude>
+
+            </div>
+        </foreignObject>
     </g>
 </svg>

@@ -49,15 +49,9 @@ angular.module('TaskManagement.Directive.Editor', ['TaskManagement.Directive'])
         return{
             restrict: "AE",
             replace: true,
-            template: '<svg><tspan ng-transclude></tspan></svg>',
+            template: '<div class="font-m box-header" ng-transclude></div>',
             transclude: true,
             link: function ($scope, element, attrs) {
-                //
-                //It needs for angular, removes svg wrapper
-                var span = $("span", element);
-                span.replaceWith(span.text());
-                var e = angular.element(element.children());
-                element.replaceWith(e);
             }
         };
     }])
@@ -65,15 +59,9 @@ angular.module('TaskManagement.Directive.Editor', ['TaskManagement.Directive'])
         return{
             restrict: "AE",
             replace: true,
-            template: '<svg><tspan x="x" dy="20" class="font-s" ng-transclude></tspan></svg>',
+            template: '<div class="font-s" ng-transclude></div>',
             transclude: true,
             link: function ($scope, element, attrs, ctrl) {
-                //
-                //It needs for angular, removes svg wrapper
-                var span = $("span", element);
-                span.replaceWith(span.text());
-                var e = angular.element(element.children());
-                element.replaceWith(e);
             }
         };
     }]);
