@@ -41,8 +41,8 @@
             <!--Content-->
             <div class="content" ng-controller="mainController">
                 <h2>Editor</h2>
-                <editor width="800" height="500">
-                    <item ng-repeat="task in tasks" connections="task.connections" width="250" height="100" x="task.x" y="task.y">
+                <editor width="1000" height="800">
+                    <item ng-repeat="task in tasks" connections="task.connections" parent="task.parent" width="150" height="100" x="task.x" y="task.y">
                         <title>{{task.name}}</title>
                         <description>{{task.description}}</description>
                     </item>

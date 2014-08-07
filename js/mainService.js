@@ -2,25 +2,36 @@
  * Created by gmeszaros on 8/5/2014.
  */
 angular.module('TaskManagement')
-    .service('mainService', ['$q', function ($q) {
+    .service('mockService', ['$q', function ($q) {
+        return{
+            getMockTasks: function (count) {
+                var tasks = [];
+                for (var i = 0; i < count; i++) {
+                    tasks.push({
+                        name: 'Task' + (i + 1),
+                        description: 'Task' + (i + 1) + ' description',
+                        x: 10 + (i * 200),
+                        y: 150,
+                        addConnection: function (task) {
+                            this.connections.push(task);
+                            task.parent = this;
+                        },
+                        parent: null,
+                        connections: []
+                    });
+                    if (i > 0) {
+                        tasks[i - 1].addConnection(tasks[i]);
+                    }
+                }
+                return tasks;
+            }
+        };
+    }]);
+angular.module('TaskManagement')
+    .service('mainService', ['$q', 'mockService', function ($q, $mock) {
         return{
             getTasks: function () {
-                return [
-                    {
-                        name:'Task1',
-                        description: 'Task1 description',
-                        x:0,
-                        y:150,
-                        connections:["Task2"]
-                    },
-                    {
-                        name:'Task2',
-                        description: 'Task2 description',
-                        x:270,
-                        y:150,
-                        connections:["Task1", "Task3", "Task4"]
-                    }
-                ];
+                return $mock.getMockTasks(5);
             }
         };
     }]);

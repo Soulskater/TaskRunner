@@ -4,6 +4,7 @@
 }
 .item:hover .connector {
   fill: #005EB8;
+  stroke: #005EB8;
 }
 .item .box {
   fill: #DBDBDB;
@@ -18,5 +19,6 @@
 }
 .item .connector {
   fill: #3088db;
+  stroke: #3088db;
 }
 /* endregion Item*/

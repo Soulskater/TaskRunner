@@ -71,4 +71,52 @@ angular.module('TaskManagement.Directive', [])
                 });
             }
         };
+    }])
+    .directive('ngX1', [function () {
+        return{
+            restrict: 'A',
+            replace: true,
+            scope: false,
+            link: function ($scope, element, attrs) {
+                $scope.$watch(attrs.ngX1, function (x1) {
+                    element.attr("x1", x1);
+                });
+            }
+        };
+    }])
+    .directive('ngX2', [function () {
+        return{
+            restrict: 'A',
+            replace: true,
+            scope: false,
+            link: function ($scope, element, attrs) {
+                $scope.$watch(attrs.ngX2, function (x2) {
+                    element.attr("x2", x2);
+                });
+            }
+        };
+    }])
+    .directive('ngY1', [function () {
+        return{
+            restrict: 'A',
+            replace: true,
+            scope: false,
+            link: function ($scope, element, attrs) {
+                $scope.$watch(attrs.ngY1, function (y1) {
+                    element.attr("y1", y1);
+                });
+            }
+        };
+    }])
+    .directive('ngY2', [function () {
+        return{
+            restrict: 'A',
+            replace: true,
+            scope: false,
+            link: function ($scope, element, attrs) {
+                $scope.$watch(attrs.ngY2, function (y2) {
+                    element.attr("y2", y2);
+                });
+            }
+        };
     }]);

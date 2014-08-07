@@ -21,8 +21,9 @@ angular.module('TaskManagement.Directive.Editor', ['TaskManagement.Directive'])
         };
     }])
     .controller("itemController", ['$scope', function ($scope) {
-        //$scope.x = $scope.x;
-        //$scope.x = $scope.y;
+        $scope.onMouseMove = function (evt) {
+            debugger;
+        };
     }])
     .directive('item', [function () {
         return{
@@ -35,7 +36,8 @@ angular.module('TaskManagement.Directive.Editor', ['TaskManagement.Directive'])
                 height: "=",
                 x: "=",
                 y: "=",
-                connections: '='
+                connections: '=',
+                parent: '='
             },
             controller: 'itemController',
             link: function ($scope, element, attrs) {
@@ -63,6 +65,44 @@ angular.module('TaskManagement.Directive.Editor', ['TaskManagement.Directive'])
             template: '<div class="font-s" ng-transclude></div>',
             transclude: true,
             link: function ($scope, element, attrs, ctrl) {
+            }
+        };
+    }])
+    .directive('draggable', [function () {
+        return{
+            restrict: "A",
+            link: function ($scope, element, attrs) {
+
+                var currentX = 0;
+                var currentY = 0;
+
+                element.on("mousedown", selectElement);
+
+                function selectElement(evt) {
+                    currentX = evt.clientX;
+                    currentY = evt.clientY;
+
+                    element.on("mousemove", moveElement);
+                }
+
+                function moveElement(evt) {
+                    var dx = evt.clientX - currentX;
+                    var dy = evt.clientY - currentY;
+                    $scope.$apply(function () {
+                        $scope.x += dx;
+                        $scope.y += dy;
+                    });
+
+                    currentX = evt.clientX;
+                    currentY = evt.clientY;
+                }
+
+                function deselectElement(evt) {
+                    element.off("mousemove");
+                }
+
+                element.on("mouseout", deselectElement);
+                element.on("mouseup", deselectElement);
             }
         };
     }]);
