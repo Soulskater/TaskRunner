@@ -3,6 +3,12 @@
  */
 angular.module('TaskManagement.Directive.Editor', ['TaskManagement.Directive'])
     .controller("editorController", ['$scope', function ($scope) {
+        $scope.onItemClick = function (item) {
+            for (var i = 0; i < $scope.items.length; i++) {
+                $scope.items[i].selected = false;
+            }
+            item.selected = true;
+        };
     }])
     .directive('editor', [function () {
         return{
@@ -12,7 +18,8 @@ angular.module('TaskManagement.Directive.Editor', ['TaskManagement.Directive'])
             templateUrl: 'js/directives/editor/templates/editor.tmpl.html',
             scope: {
                 width: "=width",
-                height: "=height"
+                height: "=height",
+                items: '='
             },
             controller: 'editorController',
             link: function ($scope, element, attrs) {
@@ -21,8 +28,8 @@ angular.module('TaskManagement.Directive.Editor', ['TaskManagement.Directive'])
         };
     }])
     .controller("itemController", ['$scope', function ($scope) {
-        $scope.onMouseMove = function (evt) {
-            debugger;
+        $scope.onItemClick = function (item) {
+            item.selected = true;
         };
     }])
     .directive('item', [function () {
@@ -36,8 +43,8 @@ angular.module('TaskManagement.Directive.Editor', ['TaskManagement.Directive'])
                 height: "=",
                 x: "=",
                 y: "=",
-                connections: '=',
-                parent: '='
+                properties: '=',
+                onItemClick: '&'
             },
             controller: 'itemController',
             link: function ($scope, element, attrs) {

@@ -6,23 +6,119 @@ angular.module('TaskManagement')
         return{
             getMockTasks: function (count) {
                 var tasks = [];
-                for (var i = 0; i < count; i++) {
-                    tasks.push({
-                        name: 'Task' + (i + 1),
-                        description: 'Task' + (i + 1) + ' description',
-                        x: 10 + (i * 200),
-                        y: 150,
-                        addConnection: function (task) {
-                            this.connections.push(task);
-                            task.parent = this;
+                var task1 = {
+                    type: "UserRegister1",
+                    typeName: "UR",
+                    properties: [
+                        {
+                            name: "userEmail",
+                            direction: 'input',
+                            type: "string"
                         },
-                        parent: null,
-                        connections: []
-                    });
-                    if (i > 0) {
-                        tasks[i - 1].addConnection(tasks[i]);
-                    }
-                }
+                        {
+                            name: "userPassword",
+                            direction: 'input',
+                            type: "string"
+                        },
+                        {
+                            name: "userName",
+                            direction: 'output',
+                            type: "string"
+                        },
+                        {
+                            name: "userId",
+                            direction: 'output',
+                            type: "int"
+                        }
+                    ],
+                    x:30,
+                    y:150
+                };
+                var task2 = {
+                    type: "UserRegister2",
+                    typeName: "UR",
+                    properties: [
+                        {
+                            name: "userEmail",
+                            direction: 'input',
+                            type: "string"
+                        },
+                        {
+                            name: "userPassword",
+                            direction: 'input',
+                            type: "string"
+                        },
+                        {
+                            name: "userName",
+                            direction: 'output',
+                            type: "string"
+                        },
+                        {
+                            name: "userId",
+                            direction: 'output',
+                            type: "int"
+                        }
+                    ],
+                    x:230,
+                    y:150
+                };
+                var task3 = {
+                    type: "UserRegister3",
+                    typeName: "UR",
+                    properties: [
+                        {
+                            name: "userEmail",
+                            direction: 'input',
+                            type: "string"
+                        },
+                        {
+                            name: "userPassword",
+                            direction: 'input',
+                            type: "string"
+                        },
+                        {
+                            name: "userName",
+                            direction: 'output',
+                            type: "string"
+                        },
+                        {
+                            name: "userId",
+                            direction: 'output',
+                            type: "int"
+                        }
+                    ],
+                    x:430,
+                    y:150
+                };
+                var task4 = {
+                    type: "UserRegister4",
+                    typeName: "UR",
+                    properties: [
+                        {
+                            name: "userEmail",
+                            direction: 'input',
+                            type: "string"
+                        },
+                        {
+                            name: "userPassword",
+                            direction: 'input',
+                            type: "string"
+                        },
+                        {
+                            name: "userName",
+                            direction: 'output',
+                            type: "string"
+                        },
+                        {
+                            name: "userId",
+                            direction: 'output',
+                            type: "int"
+                        }
+                    ],
+                    x:630,
+                    y:150
+                };
+                tasks.push(task1, task2, task3, task4);
                 return tasks;
             }
         };

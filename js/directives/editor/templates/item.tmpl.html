@@ -1,15 +1,17 @@
 <svg>
-    <g class="item" draggable>
-        <rect ng-width="width" ng-height="height" ng-x="x" ng-y="y"
+    <g class="item" draggable ng-click="onItemClick()">
+        <rect ng-width="width" ng-height="height" ng-x="x" ng-y="y" ng-class="{ selected: selected }"
               class="box" rx="2" ry="2">
         </rect>
         <!--Left connection-->
-        <circle r="5" ng-if="parent" class="connector" ng-cx="x" ng-cy="y+height/2"></circle>
+        <circle r="5" class="connector" ng-repeat="property in inputs = (properties|filter:{direction:'input'})"
+                ng-cx="x"
+                ng-cy="y+(height/(inputs.length + 1))*($index+1)"></circle>
         <!--Right connections-->
-        <g ng-repeat="connection in connections">
+        <g ng-repeat="property in outputs = (properties|filter:{direction:'output'})">
             <circle r="5" class="connector" ng-cx="x+width"
-                    ng-cy="y+(height/($parent.connections.length + 1))*($index+1)"></circle>
-            <line ng-x1="x+width" ng-y1="y+(height/($parent.connections.length + 1))*($index+1)" ng-x2="connection.x" ng-y2="connection.y+(height/2)" class="connector" />
+                    ng-cy="y+(height/(outputs.length + 1))*($index+1)"></circle>
+            <!--<line ng-x1="x+width" ng-y1="y+(height/($parent.connections.length + 1))*($index+1)" ng-x2="connection.x" ng-y2="connection.y+(height/2)" class="connector" />-->
         </g>
 
         <!--Item text-->
