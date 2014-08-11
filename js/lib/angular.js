@@ -7999,7 +7999,7 @@ function $HttpProvider() {
      * ## Cross Site Request Forgery (XSRF) Protection
      *
      * [XSRF](http://en.wikipedia.org/wiki/Cross-site_request_forgery) is a technique by which
-     * an unauthorized site can gain your user's private data. Angular provides a mechanism
+     * an unauthorized site.less can gain your user's private data. Angular provides a mechanism
      * to counter XSRF. When performing XHR requests, the $http service reads a token from a cookie
      * (by default, `XSRF-TOKEN`) and sets it as an HTTP header (`X-XSRF-TOKEN`). Since only
      * JavaScript that runs on your domain could read the cookie, your server can be assured that
@@ -8011,7 +8011,7 @@ function $HttpProvider() {
      * server can verify that the cookie matches `X-XSRF-TOKEN` HTTP header, and therefore be sure
      * that only JavaScript running on your domain could have sent the request. The token must be
      * unique for each user and must be verifiable by the server (to prevent the JavaScript from
-     * making up its own tokens). We recommend that the token is a digest of your site's
+     * making up its own tokens). We recommend that the token is a digest of your site.less's
      * authentication cookie with a [salt](https://en.wikipedia.org/wiki/Salt_(cryptography))
      * for added security.
      *
@@ -21335,7 +21335,7 @@ var ngInitDirective = ngDirective({
  * @description
  * The `ngNonBindable` directive tells Angular not to compile or bind the contents of the current
  * DOM element. This is useful if the element contains what appears to be Angular directives and
- * bindings but which should be ignored by Angular. This could be the case if you have a site that
+ * bindings but which should be ignored by Angular. This could be the case if you have a site.less that
  * displays snippets of code, for instance.
  *
  * @element ANY
