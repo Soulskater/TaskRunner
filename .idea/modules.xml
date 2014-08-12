@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/LocalProjects.iml" filepath="$PROJECT_DIR$/.idea/LocalProjects.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/TaskRunner.iml" filepath="$PROJECT_DIR$/.idea/TaskRunner.iml" />
     </modules>
   </component>
 </project>

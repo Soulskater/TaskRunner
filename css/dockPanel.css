@@ -1,0 +1,82 @@
+.dock-control {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.dock-control .dock-panel {
+  position: absolute;
+  background-color: #404040;
+  z-index: 10;
+  box-shadow: 1px 0px 10px #353535;
+  /*.splitter {
+            width: 3px;
+            display: inline-block;
+            background: #5185a0;
+            height: 800px;
+            cursor: w-resize;
+            box-shadow: 0px 0px 3px #46ACE6;
+        }
+
+        .split-pane {
+            display: inline-block;
+            vertical-align: top;
+            height: 800px;
+            padding: 15px;
+        }*/
+}
+.dock-control .dock-panel.left {
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+.dock-control .dock-panel.left .splitter {
+  right: 0;
+  top: 0;
+  bottom: 0;
+  cursor: w-resize;
+}
+.dock-control .dock-panel.top {
+  left: 0;
+  right: 0;
+  top: 0;
+}
+.dock-control .dock-panel.top .splitter {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  cursor: n-resize;
+  height: 3px;
+  width: auto;
+}
+.dock-control .dock-panel.right {
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.dock-control .dock-panel.right .splitter {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  cursor: w-resize;
+}
+.dock-control .dock-panel.bottom {
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.dock-control .dock-panel.bottom .splitter {
+  left: 0;
+  right: 0;
+  top: 0;
+  cursor: n-resize;
+  height: 3px;
+  width: auto;
+}
+.dock-control .dock-panel .splitter {
+  width: 3px;
+  display: inline-block;
+  background: #5185a0;
+  position: absolute;
+}

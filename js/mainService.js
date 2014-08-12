@@ -1,7 +1,7 @@
 /**
  * Created by gmeszaros on 8/5/2014.
  */
-angular.module('TaskManagement')
+angular.module('TaskRunner')
     .service('mockService', ['$q', function ($q) {
         return{
             getMockTasks: function (count) {
@@ -123,7 +123,7 @@ angular.module('TaskManagement')
             }
         };
     }]);
-angular.module('TaskManagement')
+angular.module('TaskRunner')
     .service('mainService', ['$q', 'mockService', function ($q, $mock) {
         return{
             getTasks: function () {

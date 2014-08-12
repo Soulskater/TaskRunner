@@ -18,6 +18,12 @@ body {
   white-space: nowrap;
   font-size: 0;
 }
+.tool-panel {
+  margin-top: 60px;
+  color: #ffffff;
+  padding: 10px;
+}
+/*
 .left-menu {
   background-color: #404040;
   min-width: 160px;
@@ -28,16 +34,16 @@ body {
   position: relative;
   z-index: 1;
   box-shadow: 1px 0px 10px #353535;
-}
-.left-menu ul {
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-}
-.left-menu ul li {
-  color: #ffffff;
-}
-.left-menu ul li:hover {
-  background-color: #e4e4e4;
-  color: #404040;
-}
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    li {
+      color: @white;
+      &:hover {
+        background-color: @light-grey;
+        color: @dark-grey;
+      }
+    }
+  }
+}*/

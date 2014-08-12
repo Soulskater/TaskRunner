@@ -1,7 +1,7 @@
 /**
  * Created by gmeszaros on 8/5/2014.
  */
-angular.module('TaskManagement.Directive.Editor', ['TaskManagement.Directive'])
+angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
     .controller("editorController", ['$scope', function ($scope) {
         $scope.onItemClick = function (item) {
             for (var i = 0; i < $scope.items.length; i++) {
