@@ -21,11 +21,17 @@ angular.module('TaskRunner.Directive.DockPanel', [])
             },
             link: function (scope, element) {
                 var horizontal = scope.dockStyle === 'left' || scope.dockStyle === 'right';
+                var centerPanel = $("[dock-style='center']", element.parent('.dock-control'));
+
                 if (horizontal) {
                     element.css({
                         minWidth: scope.minSize + "px",
                         maxWidth: scope.maxSize + "px"
                     });
+                    if (scope.dockStyle === 'left')
+                        centerPanel.css({left: scope.minSize});
+                    else
+                        centerPanel.css({right: scope.minSize});
                 }
                 else {
                     element.css({
@@ -50,20 +56,24 @@ angular.module('TaskRunner.Directive.DockPanel', [])
 
                     switch (scope.dockStyle) {
                         case "left":
-                            pos = ev.clientX - element.width() - 15;
+                            pos = ev.clientX - element.width();
                             element.width(element.width() + pos);
+                            centerPanel.css({left: element.width()});
                             break;
                         case "right":
                             pos = bounds.left - ev.clientX;
                             element.width(element.width() + pos);
+                            centerPanel.css({right: element.width()});
                             break;
                         case "top":
                             pos = ev.clientY - bounds.top;
                             element.height(pos);
+                            centerPanel.css({top: element.height()});
                             break;
                         case "bottom":
                             pos = bounds.top - ev.clientY;
                             element.height(element.height() + pos);
+                            centerPanel.css({bottom: element.height()});
                             break;
                     }
                 });

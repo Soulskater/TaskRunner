@@ -7,24 +7,9 @@
 }
 .dock-control .dock-panel {
   position: absolute;
-  background-color: #404040;
+  background-color: #2d2d30;
   z-index: 10;
-  box-shadow: 1px 0px 10px #353535;
-  /*.splitter {
-            width: 3px;
-            display: inline-block;
-            background: #5185a0;
-            height: 800px;
-            cursor: w-resize;
-            box-shadow: 0px 0px 3px #46ACE6;
-        }
-
-        .split-pane {
-            display: inline-block;
-            vertical-align: top;
-            height: 800px;
-            padding: 15px;
-        }*/
+  box-shadow: 1px 0px 10px #B9B9B9;
 }
 .dock-control .dock-panel.left {
   left: 0;
@@ -74,9 +59,15 @@
   height: 3px;
   width: auto;
 }
+.dock-control .dock-panel.center {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
 .dock-control .dock-panel .splitter {
   width: 3px;
   display: inline-block;
-  background: #5185a0;
+  background: #007acb;
   position: absolute;
 }

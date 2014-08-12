@@ -4,9 +4,13 @@
 body {
   background-color: #e4e4e4;
 }
-.font-s {
+.font-xs {
   font-family: 'Segoe UI', 'Open Sans Bold', Verdana, Arial, Helvetica, sans-serif;
   font-size: 14px;
+}
+.font-s {
+  font-family: 'Segoe UI Light', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
+  font-size: 1.7rem;
 }
 .font-m {
   font-family: 'Segoe UI Light', 'Open Sans Light', Verdana, Arial, Helvetica, sans-serif;
