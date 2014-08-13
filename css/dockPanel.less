@@ -1,79 +1,114 @@
+@import "shared.less";
+
 .dock-control {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  .dock-panel {
     position: absolute;
-    background-color: #2d2d30;
-    z-index: 10;
-    box-shadow: 1px 0px 10px #B9B9B9;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    .dock-panel {
+        position: absolute;
+        background-color: #2d2d30;
+        z-index: 10;
+        box-shadow: 1px 0px 10px #B9B9B9;
 
-    &.left {
-      left: 0;
-      top: 0;
-      bottom: 0;
-      .splitter {
-        right: 0;
-        top: 0;
-        bottom: 0;
-        cursor: w-resize;
-      }
-    }
-    &.top {
-      left: 0;
-      right: 0;
-      top: 0;
-      .splitter {
-        left: 0;
-        right: 0;
-        bottom: 0;
-        cursor: n-resize;
-        height: 3px;
-        width: auto;
-      }
-    }
-    &.right {
-      right: 0;
-      top: 0;
-      bottom: 0;
-      .splitter {
-        left: 0;
-        top: 0;
-        bottom: 0;
-        cursor: w-resize;
-      }
-    }
-    &.bottom {
-      left: 0;
-      right: 0;
-      bottom: 0;
-      .splitter {
-        left: 0;
-        right: 0;
-        top: 0;
-        cursor: n-resize;
-        height: 3px;
-        width: auto;
-      }
-    }
+        &.left {
+            left: 0;
+            top: 0;
+            bottom: 0;
+            .splitter {
+                right: 0;
+                top: 0;
+                bottom: 0;
+                cursor: w-resize;
+            }
+        }
+        &.top {
+            left: 0;
+            right: 0;
+            top: 0;
+            .splitter {
+                left: 0;
+                right: 0;
+                bottom: 0;
+                cursor: n-resize;
+                height: 3px;
+                width: auto;
+            }
+        }
+        &.right {
+            right: 0;
+            top: 0;
+            bottom: 0;
+            .splitter {
+                left: 0;
+                top: 0;
+                bottom: 0;
+                cursor: w-resize;
+            }
+        }
+        &.bottom {
+            left: 0;
+            right: 0;
+            bottom: 0;
+            .splitter {
+                left: 0;
+                right: 0;
+                top: 0;
+                cursor: n-resize;
+                height: 3px;
+                width: auto;
+            }
+        }
+        &.center {
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
 
-    &.center {
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;
-    }
+        &.collapsed {
+            &.left, &.right {
+                min-width: 30px !important;
+                width: 30px !important;
+                .dock-panel-title {
+                    -webkit-transform: rotate(90deg);
+                    -moz-transform: rotate(90deg);
+                    -ms-transform: rotate(90deg);
+                    -o-transform: rotate(90deg);
+                    transform: rotate(90deg);
 
-    .splitter {
-      width: 3px;
-      display: inline-block;
-      background: #007acb;
-      position: absolute;
-    }
+                    /* also accepts left, right, top, bottom coordinates; not required, but a good idea for styling */
+                    -webkit-transform-origin: 50% 50%;
+                    -moz-transform-origin: 50% 50%;
+                    -ms-transform-origin: 50% 50%;
+                    -o-transform-origin: 50% 50%;
+                    transform-origin: 50% 50%;
+                }
+            }
+        }
 
-    .dock-container {
+        .dock-panel-title {
+            color: @white;
+            background: @dark-blue;
+            padding: 4px 4px 4px 15px;
+        }
+
+        .splitter {
+            width: 5px;
+            display: inline-block;
+            background: @darker; /* Old browsers */
+            background: -moz-linear-gradient(left,  @darker 0%, @ligher 30%, @ligher 70%, @darker 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, right top, color-stop(0%,@darker), color-stop(30%,@ligher), color-stop(70%,@ligher), color-stop(100%,@darker)); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(left,  @darker 0%,@ligher 30%,@ligher 70%,@darker 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(left,  @darker 0%,@ligher 30%,@ligher 70%,@darker 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(left,  @darker 0%,@ligher 30%,@ligher 70%,@darker 100%); /* IE10+ */
+            background: linear-gradient(to right,  @darker 0%,@ligher 30%,@ligher 70%,@darker 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@darker', endColorstr='@darker', GradientType=1); /* IE6-9 */
+            position: absolute;
+        }
+
+        .dock-container {
+        }
     }
-  }
 }

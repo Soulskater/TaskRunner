@@ -7,7 +7,7 @@ angular.module('TaskRunner')
             getMockTasks: function (count) {
                 var tasks = [];
                 var task1 = {
-                    type: "UserRegister1",
+                    type: "UserRegister",
                     typeName: "UR",
                     properties: [
                         {
@@ -31,12 +31,12 @@ angular.module('TaskRunner')
                             type: "int"
                         }
                     ],
-                    x:30,
-                    y:150
+                    x: 30,
+                    y: 150
                 };
                 var task2 = {
-                    type: "UserRegister2",
-                    typeName: "UR",
+                    type: "UserLogin",
+                    typeName: "UL",
                     properties: [
                         {
                             name: "userEmail",
@@ -59,20 +59,15 @@ angular.module('TaskRunner')
                             type: "int"
                         }
                     ],
-                    x:230,
-                    y:150
+                    x: 230,
+                    y: 150
                 };
                 var task3 = {
-                    type: "UserRegister3",
-                    typeName: "UR",
+                    type: "SampleTask",
+                    typeName: "ST",
                     properties: [
                         {
                             name: "userEmail",
-                            direction: 'input',
-                            type: "string"
-                        },
-                        {
-                            name: "userPassword",
                             direction: 'input',
                             type: "string"
                         },
@@ -81,14 +76,9 @@ angular.module('TaskRunner')
                             direction: 'output',
                             type: "string"
                         },
-                        {
-                            name: "userId",
-                            direction: 'output',
-                            type: "int"
-                        }
                     ],
-                    x:430,
-                    y:150
+                    x: 430,
+                    y: 150
                 };
                 var task4 = {
                     type: "UserRegister4",
@@ -115,10 +105,10 @@ angular.module('TaskRunner')
                             type: "int"
                         }
                     ],
-                    x:630,
-                    y:150
+                    x: 630,
+                    y: 150
                 };
-                tasks.push(task1, task2, task3, task4);
+                tasks.push(task1, task2, task3);
                 return tasks;
             }
         };

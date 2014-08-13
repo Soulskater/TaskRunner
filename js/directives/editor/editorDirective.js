@@ -10,20 +10,35 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
             item.selected = true;
         };
     }])
-    .directive('editor', [function () {
+    .directive('editor', ["$timeout", function ($timeout) {
         return{
             restrict: "AE",
             transclude: true,
             replace: true,
             templateUrl: 'js/directives/editor/templates/editor.tmpl.html',
             scope: {
-                width: "=width",
-                height: "=height",
+                width: "=",
+                height: "=",
+                autoSize: '=',
                 items: '='
             },
             controller: 'editorController',
             link: function ($scope, element, attrs) {
+                if ($scope.autoSize) {
+                    $timeout(function(){
+                        setSize();
+                    },50);
+                    $(window).resize(function () {
+                        $scope.$apply(function () {
+                            setSize();
+                        });
+                    });
+                }
 
+                function setSize() {
+                    $scope.width = element.parent().width();
+                    $scope.height = element.parent().height();
+                }
             }
         };
     }])

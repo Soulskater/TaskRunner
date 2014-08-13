@@ -20,19 +20,13 @@ body {
 }
 .tool-panel {
   margin-top: 60px;
-  color: #ffffff;
   z-index: 11 !important;
-}
-.tool-panel .title {
-  background: #007acb;
-  padding: 5px 5px 5px 15px;
 }
 .editor-panel {
   margin-top: 60px;
-  padding: 10px;
   background-color: #e4e4e4 !important;
 }
 .editor-panel .title {
-  color: #007acb;
-  padding: 5px 5px 5px 15px;
+  color: #007acb !important;
+  background: none !important;
 }
