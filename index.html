@@ -28,11 +28,10 @@
     <!--Menu-->
     <!--Content-->
     <dock-control>
-        <dock-panel class="tool-panel" dock-style="'left'" min-size="300">
+        <dock-panel class="tool-panel" dock-style="'left'" min-size="100">
             <div class="font-s dock-panel-title">Templates</div>
-            <div style="width: 16px; height: 16px;"><</div>
         </dock-panel>
-        <dock-panel dock-style="center" class="editor-panel">
+        <dock-panel dock-style="'center'" class="editor-panel">
             <div class="font-m dock-panel-title title">Visual Designer</div>
             <editor width="400" height="800" items="tasks" auto-size="true">
                 <item onItemClick="onItemClick()" ng-repeat="task in tasks" properties="task.properties"
@@ -43,7 +42,7 @@
                 </item>
             </editor>
         </dock-panel>
-        <dock-panel class="tool-panel" dock-style="'right'" min-size="300">
+        <dock-panel class="tool-panel" dock-style="'right'" min-size="100">
             <div class="font-s dock-panel-title">Properties</div>
         </dock-panel>
     </dock-control>

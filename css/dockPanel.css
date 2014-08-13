@@ -69,11 +69,12 @@
 }
 .dock-control .dock-panel.collapsed.left,
 .dock-control .dock-panel.collapsed.right {
-  min-width: 30px !important;
-  width: 30px !important;
+  min-width: 35px !important;
+  width: 35px !important;
 }
 .dock-control .dock-panel.collapsed.left .dock-panel-title,
 .dock-control .dock-panel.collapsed.right .dock-panel-title {
+  background: none;
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
@@ -89,7 +90,7 @@
 .dock-control .dock-panel .dock-panel-title {
   color: #ffffff;
   background: #007acb;
-  padding: 4px 4px 4px 15px;
+  padding: 5px 4px 4px 15px;
 }
 .dock-control .dock-panel .splitter {
   width: 5px;
@@ -111,4 +112,25 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@darker', endColorstr='@darker', GradientType=1);
   /* IE6-9 */
   position: absolute;
+  z-index: 1;
+}
+.dock-control .dock-panel .dock-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.rotate {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+  /* also accepts left, right, top, bottom coordinates; not required, but a good idea for styling */
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
 }
