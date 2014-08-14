@@ -106,9 +106,15 @@
             background: linear-gradient(to right,  @darker 0%,@ligher 30%,@ligher 70%,@darker 100%); /* W3C */
             filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@darker', endColorstr='@darker', GradientType=1); /* IE6-9 */
             position: absolute;
+            z-index: 1;
         }
 
         .dock-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
         }
     }
 }

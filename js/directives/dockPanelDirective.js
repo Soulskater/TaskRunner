@@ -21,7 +21,7 @@ angular.module('TaskRunner.Directive.DockPanel', [])
             },
             link: function (scope, element) {
                 var horizontal = scope.dockStyle === 'left' || scope.dockStyle === 'right';
-                var centerPanel = $("[dock-style='center']", element.parent('.dock-control'));
+                var centerPanel = $("[dock-style=\"'center'\"]", element.parent('.dock-control'));
 
                 if (horizontal) {
                     element.css({

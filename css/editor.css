@@ -1,3 +1,6 @@
+.editor {
+  overflow: visible;
+}
 /* region Item*/
 .item.selected {
   stroke: #005EB8;

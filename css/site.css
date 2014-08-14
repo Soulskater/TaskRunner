@@ -30,3 +30,11 @@ body {
   color: #007acb !important;
   background: none !important;
 }
+.editor-container {
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
