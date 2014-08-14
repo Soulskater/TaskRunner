@@ -4,7 +4,11 @@
 angular.module('TaskRunner.Directive.DockPanel', [])
     .controller('dockPanelCtrl', function ($scope) {
         $scope.isCollapsed = false;
+        $scope.isDragging = false;
 
+        this.setDrag = function (value) {
+            $scope.isDragging = value;
+        };
         this.toggleCollapse = function () {
             $scope.isCollapsed = !$scope.isCollapsed;
         };
@@ -13,7 +17,7 @@ angular.module('TaskRunner.Directive.DockPanel', [])
         return {
             restrict: 'AE',
             replace: true,
-            require: '^dockControl',
+            require: '',
             transclude: true,
             scope: {
                 orientation: '@',
@@ -22,11 +26,11 @@ angular.module('TaskRunner.Directive.DockPanel', [])
                 dockStyle: '='
             },
             template: '<div class="{{ \'dock-panel \' + dockStyle}}" ng-class="{ collapsed: isCollapsed }">' +
-                '<div class="splitter"></div>' +
+                '<dock-splitter></dock-splitter>' +
                 '<div class="dock-container" ng-transclude>' +
                 '</div>',
             controller: "dockPanelCtrl",
-            link: function (scope, element) {
+            link: function (scope, element, attrs, dockControlCtrl) {
                 scope.$watch("isCollapsed", function () {
                     refreshSize();
                 });
@@ -52,7 +56,7 @@ angular.module('TaskRunner.Directive.DockPanel', [])
                 }
 
                 element.parent('.dock-control').bind('mousemove', function (ev) {
-                    if (!drag) {
+                    if (!scope.isDragging) {
                         return;
                     }
 
@@ -105,9 +109,9 @@ angular.module('TaskRunner.Directive.DockPanel', [])
                 }
 
                 scope.$on('$destroy', function () {
-                    element.unbind('mousedown');
+                    //element.unbind('mousedown');
                     element.parent('.dock-control').unbind('mousemove');
-                    $(document).unbind('mouseup');
+                    //$(document).unbind('mouseup');
                 });
             }
         };
@@ -119,9 +123,11 @@ angular.module('TaskRunner.Directive.DockPanel', [])
             transclude: true,
             require: '^dockPanel',
             template: '<div class="font-s dock-panel-title" ng-transclude></div>',
-            link: function (scope, element, attrs, dockPanelCtrl) {
+            link: function ($scope, element, attrs, dockPanelCtrl) {
                 element.dblclick(function () {
-                    dockPanelCtrl.toggleCollapse();
+                    $scope.$apply(function () {
+                        dockPanelCtrl.toggleCollapse();
+                    });
                 });
             }
         };
@@ -130,20 +136,25 @@ angular.module('TaskRunner.Directive.DockPanel', [])
         return {
             restrict: 'AE',
             replace: true,
-            require: '^dockControl',
+            require: '^dockPanel',
             template: '<div class="splitter"></div>',
-            link: function (scope, element, attrs, dockControlCtrl) {
-                element.dblclick(function () {
-                    element.bind('mousedown', function (ev) {
-                        ev.preventDefault();
-                        dockControlCtrl.toggleDrag();
+            link: function ($scope, element, attrs, dockPanelCtrl) {
+                element.bind('mousedown', function (ev) {
+                    ev.preventDefault();
+                    dockPanelCtrl.setDrag(true);
+                });
+
+                $(document).bind('mouseup', function (ev) {
+                    $scope.$apply(function () {
+                        dockPanelCtrl.setDrag(false);
                     });
                 });
 
                 //
                 //Disposing
-                scope.$on('$destroy', function () {
+                $scope.$on('$destroy', function () {
                     element.unbind('mousedown');
+                    $(document).unbind('mouseup');
                 });
             }
         };
@@ -155,18 +166,10 @@ angular.module('TaskRunner.Directive.DockPanel', [])
             transclude: true,
             template: '<div class="dock-control" ng-transclude></div>',
             controller: function ($scope) {
-                $scope.isDragging = false;
 
-                this.toggleDrag = function () {
-                    $scope.isDragging = !$scope.isDragging;
-                };
             },
-            link: function ($scope, element) {
-                $(document).bind('mouseup', function (ev) {
-                    $scope.$apply(function () {
-                        $scope.isDragging = false;
-                    });
-                });
+            link: function ($scope, element, attrs, dockPanelCtrl) {
+
             }
         };
     });
