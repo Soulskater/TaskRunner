@@ -25,9 +25,9 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
             controller: 'editorController',
             link: function ($scope, element, attrs) {
                 if ($scope.autoSize) {
-                    $timeout(function(){
+                    $timeout(function () {
                         setSize();
-                    },50);
+                    }, 50);
                     $(window).resize(function () {
                         $scope.$apply(function () {
                             setSize();
@@ -37,7 +37,7 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
 
                 function setSize() {
                     $scope.width = element.parent().width();
-                    $scope.height = element.parent().height();
+                    $scope.height = element.parent().height() - element.parent().offset().top;
                 }
             }
         };

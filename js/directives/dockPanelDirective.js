@@ -2,7 +2,7 @@
  * Created by MCG on 2014.08.11..
  */
 angular.module('TaskRunner.Directive.DockPanel', [])
-    .directive('dockPanel', function () {
+    .directive('dockPanel', function ($timeout) {
         return {
             restrict: 'AE',
             replace: true,
@@ -13,13 +13,22 @@ angular.module('TaskRunner.Directive.DockPanel', [])
                 maxSize: '=',
                 dockStyle: '='
             },
-            template: '<div class="dock-panel" ng-class="dockStyle">' +
+            template: '<div class="dock-panel" ng-dblclick="toggleCollapse()" ng-class="dockStyle">' +
                 '<div class="splitter"></div>' +
                 '<div class="dock-container" ng-transclude>' +
                 '</div>',
             controller: function ($scope) {
+                $scope.isCollapsed = false;
+
             },
             link: function (scope, element) {
+                scope.toggleCollapse = function () {
+                    scope.isCollapsed = !scope.isCollapsed;
+                    $timeout(function () {
+                        refreshSize();
+                    }, 0);
+                };
+
                 var horizontal = scope.dockStyle === 'left' || scope.dockStyle === 'right';
                 var centerPanel = $("[dock-style=\"'center'\"]", element.parent('.dock-control'));
 
@@ -76,10 +85,41 @@ angular.module('TaskRunner.Directive.DockPanel', [])
                             centerPanel.css({bottom: element.height()});
                             break;
                     }
+                    $timeout(function () {
+                        $(window).resize();
+                    });
                 });
+
+                function refreshSize() {
+                    switch (scope.dockStyle) {
+                        case "left":
+                            centerPanel.css({left: element.width()});
+                            break;
+                        case "right":
+                            centerPanel.css({right: element.width()});
+                            break;
+                        case "top":
+                            centerPanel.css({top: element.height()});
+                            break;
+                        case "bottom":
+                            centerPanel.css({bottom: element.height()});
+                            break;
+                    }
+                    $(window).resize();
+                }
 
                 $(document).bind('mouseup', function (ev) {
                     drag = false;
+                    $timeout(function () {
+                        if (horizontal) {
+                            if (element.width() <= 100)
+                                scope.toggleCollapse();
+                        }
+                        else {
+                            if (element.height() <= 100)
+                                scope.toggleCollapse();
+                        }
+                    }, 50);
                 });
 
                 scope.$on('$destroy', function () {

@@ -69,11 +69,12 @@
 }
 .dock-control .dock-panel.collapsed.left,
 .dock-control .dock-panel.collapsed.right {
-  min-width: 30px !important;
-  width: 30px !important;
+  min-width: 35px !important;
+  width: 35px !important;
 }
 .dock-control .dock-panel.collapsed.left .dock-panel-title,
 .dock-control .dock-panel.collapsed.right .dock-panel-title {
+  background: none;
   -webkit-transform: rotate(90deg);
   -moz-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
@@ -89,7 +90,7 @@
 .dock-control .dock-panel .dock-panel-title {
   color: #ffffff;
   background: #007acb;
-  padding: 4px 4px 4px 15px;
+  padding: 5px 4px 4px 15px;
 }
 .dock-control .dock-panel .splitter {
   width: 5px;
