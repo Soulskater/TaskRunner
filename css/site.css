@@ -2,6 +2,10 @@
 /*Colors*/
 body {
   background-color: #e4e4e4;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 .header {
   height: 60px;

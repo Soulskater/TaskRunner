@@ -52,6 +52,7 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
             restrict: "AE",
             replace: true,
             templateUrl: 'js/directives/editor/templates/item.tmpl.html',
+            type:'svg',
             transclude: true,
             scope: {
                 width: "=",

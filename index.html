@@ -13,9 +13,12 @@
         <script src="js/lib/jquery-2.1.1.js" type="text/javascript"></script>
         <script src="js/lib/angular.js" type="text/javascript"></script>
         <script src="js/lib/bootstrap.js" type="text/javascript"></script>
+        <script src="js/lib/hammer.min.js" type="text/javascript"></script>
+        <script src="js/lib/jquery.hammer.js" type="text/javascript"></script>
 
         <script src="js/mainController.js" type="text/javascript"></script>
         <script src="js/mainService.js" type="text/javascript"></script>
+        <script src="js/directives/hammerDirective.js" type="text/javascript"></script>
         <script src="js/directives/svgDirective.js" type="text/javascript"></script>
         <script src="js/directives/editor/editorDirective.js" type="text/javascript"></script>
         <script src="js/directives/dockPanelDirective.js" type="text/javascript"></script>
@@ -36,7 +39,7 @@
                     <dock-title class="font-m title">Visual Designer</dock-title>
                     <div class="editor-container">
                         <editor width="1000" height="800" items="tasks" auto-size="false">
-                            <item onItemClick="onItemClick()" ng-repeat="task in tasks" properties="task.properties"
+                            <item onItemClick="onItemClick()" tap="onItemClick()" ng-repeat="task in tasks" properties="task.properties"
                                   width="150"
                                   height="100" x="task.x" y="task.y">
                                 <title>{{task.type}}</title>
