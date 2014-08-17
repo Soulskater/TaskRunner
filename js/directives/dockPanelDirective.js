@@ -33,7 +33,9 @@ angular.module('TaskRunner.Directive.DockPanel', [])
             },
             link: function (scope, element, attrs) {
                 var watcher = scope.$watch("isCollapsed", function () {
-                    refreshSize();
+                    $timeout(function () {
+                        refreshSize();
+                    },200);
                 });
 
                 var horizontal = scope.dockStyle === 'left' || scope.dockStyle === 'right';
