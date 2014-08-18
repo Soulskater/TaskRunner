@@ -1,2 +1,9 @@
-<svg class="editor" ng-width="width" ng-height="height" ng-transclude preserveAspectRatio="none">
+<svg class="editor" ng-init="renderItems()" ng-width="width" ng-height="height" ng-transclude preserveAspectRatio="none">
+    <item ng-repeat="task in items"
+          properties="task.properties"
+          width="150"
+          height="100">
+        <title>{{task.type}}</title>
+        <description>{{task.typeName}}</description>
+    </item>
 </svg>

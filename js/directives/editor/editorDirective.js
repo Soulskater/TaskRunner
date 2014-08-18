@@ -9,6 +9,13 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
             }
             item.selected = true;
         };
+
+        $scope.renderItems = function () {
+            for (var i = 0; i < $scope.items.length; i++) {
+                $scope.items[i].x = 30 + (i* 240);
+                $scope.items[i].y = 150;
+            }
+        };
     }])
     .directive('editor', ["$timeout", function ($timeout) {
         return{
@@ -45,6 +52,8 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
     .controller("itemController", ['$scope', function ($scope) {
         $scope.onItemClick = function (item) {
             item.selected = true;
+            item.x = 100;
+            item.y = 100;
         };
     }])
     .directive('item', [function () {
@@ -52,7 +61,7 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
             restrict: "AE",
             replace: true,
             templateUrl: 'js/directives/editor/templates/item.tmpl.html',
-            type:'svg',
+            type: 'svg',
             transclude: true,
             scope: {
                 width: "=",

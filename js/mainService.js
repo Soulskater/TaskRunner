@@ -8,7 +8,7 @@ angular.module('TaskRunner')
                 var tasks = [];
                 var task1 = {
                     type: "UserRegister",
-                    typeName: "UR",
+                    name: "UR1",
                     properties: [
                         {
                             name: "userEmail",
@@ -18,12 +18,20 @@ angular.module('TaskRunner')
                         {
                             name: "userPassword",
                             direction: 'input',
-                            type: "string"
+                            type: "string",
+                            bind: {
+                                name: 'UL',
+                                field: 'userPassword'
+                            }
                         },
                         {
                             name: "userName",
                             direction: 'output',
-                            type: "string"
+                            type: "string",
+                            bind: {
+                                name: 'UL',
+                                field: 'userEmail'
+                            }
                         },
                         {
                             name: "userId",
@@ -36,7 +44,7 @@ angular.module('TaskRunner')
                 };
                 var task2 = {
                     type: "UserLogin",
-                    typeName: "UL",
+                    name: "UL",
                     properties: [
                         {
                             name: "userEmail",
@@ -64,7 +72,7 @@ angular.module('TaskRunner')
                 };
                 var task3 = {
                     type: "SampleTask",
-                    typeName: "ST",
+                    name: "ST",
                     properties: [
                         {
                             name: "userEmail",
@@ -82,7 +90,7 @@ angular.module('TaskRunner')
                 };
                 var task4 = {
                     type: "UserRegister4",
-                    typeName: "UR",
+                    name: "UR4",
                     properties: [
                         {
                             name: "userEmail",
