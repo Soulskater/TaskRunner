@@ -18,11 +18,7 @@ angular.module('TaskRunner')
                         {
                             name: "userPassword",
                             direction: 'input',
-                            type: "string",
-                            bind: {
-                                name: 'UL',
-                                field: 'userPassword'
-                            }
+                            type: "string"
                         },
                         {
                             name: "userName",
@@ -36,7 +32,11 @@ angular.module('TaskRunner')
                         {
                             name: "userId",
                             direction: 'output',
-                            type: "int"
+                            type: "int",
+                            bind: {
+                                name: 'UL',
+                                field: 'userPassword'
+                            }
                         }
                     ],
                     x: 30,
