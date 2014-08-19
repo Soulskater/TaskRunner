@@ -127,7 +127,7 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
         return{
             restrict: "AE",
             replace: true,
-            template: '<div class="font-m box-header" ng-transclude></div>',
+            template: '<div class="font-s box-header" ng-transclude></div>',
             transclude: true,
             link: function ($scope, element, attrs) {
             }
@@ -137,7 +137,7 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
         return{
             restrict: "AE",
             replace: true,
-            template: '<div class="font-s" ng-transclude></div>',
+            template: '<div class="font-xs" ng-transclude></div>',
             transclude: true,
             link: function ($scope, element, attrs, ctrl) {
             }

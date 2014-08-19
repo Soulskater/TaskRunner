@@ -1,34 +1,53 @@
-.editor{
+@int-color: #3088db;
+@string-color: #DB4F00;
+@bool-color: #00B821;
+//@float-color:#3088db;
+
+.editor {
     overflow: visible;
 }
+
 /* region Item*/
 .item {
 
-  &.selected {
-    stroke: #005EB8;
-  }
-  .box {
-    fill: #DBDBDB;
-    stroke-width: 1;
-    stroke: #3088db;
-  }
-
-  .box-header {
-    span {
-      color: #282828;
+    &.selected {
+        stroke: #005EB8;
     }
-    line-height: 21px;
-  }
-
-  .connector {
-    fill: #3088db;
-    stroke: #3088db;
-    &:hover {
-      fill: #005EB8;
-      stroke: #005EB8;
+    .box {
+        fill: #DBDBDB;
+        stroke-width: 1;
+        stroke: #3088db;
     }
-  }
 
+    .box-header {
+        span {
+            color: #282828;
+        }
+        line-height: 21px;
+    }
+
+    .connector {
+        /*&:hover {
+            fill: #005EB8;
+            stroke: #005EB8;
+        }*/
+    }
+
+}
+
+.string {
+    fill: @string-color;
+    stroke: @string-color;
+}
+
+.int {
+    fill: @int-color;
+    stroke: @int-color;
+}
+
+.bool {
+    fill: @bool-color;
+    stroke: @bool-color;
 }
 
 /* endregion Item*/

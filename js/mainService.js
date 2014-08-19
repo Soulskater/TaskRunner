@@ -32,15 +32,13 @@ angular.module('TaskRunner')
                         {
                             name: "userId",
                             direction: 'output',
-                            type: "int",
+                            type: "bool",
                             bind: {
                                 name: 'UL',
                                 field: 'userPassword'
                             }
                         }
-                    ],
-                    x: 30,
-                    y: 150
+                    ]
                 };
                 var task2 = {
                     type: "UserLogin",
@@ -59,16 +57,18 @@ angular.module('TaskRunner')
                         {
                             name: "userName",
                             direction: 'output',
-                            type: "string"
+                            type: "string",
+                            bind: {
+                                name: 'ST',
+                                field: 'userEmail'
+                            }
                         },
                         {
                             name: "userId",
                             direction: 'output',
                             type: "int"
                         }
-                    ],
-                    x: 230,
-                    y: 150
+                    ]
                 };
                 var task3 = {
                     type: "SampleTask",
@@ -84,9 +84,7 @@ angular.module('TaskRunner')
                             direction: 'output',
                             type: "string"
                         },
-                    ],
-                    x: 430,
-                    y: 150
+                    ]
                 };
                 var task4 = {
                     type: "UserRegister4",
@@ -112,9 +110,7 @@ angular.module('TaskRunner')
                             direction: 'output',
                             type: "int"
                         }
-                    ],
-                    x: 630,
-                    y: 150
+                    ]
                 };
                 tasks.push(task1, task2, task3);
                 return tasks;

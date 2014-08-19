@@ -17,11 +17,21 @@
   color: #282828;
 }
 .item .connector {
+  /*&:hover {
+            fill: #005EB8;
+            stroke: #005EB8;
+        }*/
+}
+.string {
+  fill: #db4f00;
+  stroke: #db4f00;
+}
+.int {
   fill: #3088db;
   stroke: #3088db;
 }
-.item .connector:hover {
-  fill: #005EB8;
-  stroke: #005EB8;
+.bool {
+  fill: #00b821;
+  stroke: #00b821;
 }
 /* endregion Item*/
