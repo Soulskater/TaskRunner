@@ -68,14 +68,20 @@
     }
 
     &.collapsed {
-      -webkit-transition: 0.2s ease-in-out;
-      -moz-transition: 0.2s ease-in-out;
-      -o-transition: 0.2s ease-in-out;
-      transition: 0.2s ease-in-out;
+      -webkit-transition: 0.2s linear;
+      -moz-transition: 0.2s linear;
+      -o-transition: 0.2s linear;
+      transition: 0.2s linear;
 
       &.left, &.right {
-        min-width: 35px!important;
-        width: 35px!important;
+        min-width: 25px !important;
+        width: 25px !important;
+        .dock-content {
+          opacity: 0;
+        }
+        .splitter {
+          display: none;
+        }
 
         .dock-panel-title {
           background: none;
@@ -99,12 +105,20 @@
         .dock-panel-title {
         }
       }
+
+      .dock-panel-title {
+        border-bottom: none;
+      }
+
     }
 
     .dock-panel-title {
       color: @white;
-      background: @dark-blue;
-      padding: 5px 4px 4px 15px;
+      span {
+        background: @dark-blue;
+        padding: 1px 15px 1px 15px;
+      }
+      border-bottom: 2px solid @dark-blue;
     }
 
     .splitter {

@@ -68,15 +68,23 @@
   bottom: 0;
 }
 .dock-control .dock-panel.collapsed {
-  -webkit-transition: 0.2s ease-in-out;
-  -moz-transition: 0.2s ease-in-out;
-  -o-transition: 0.2s ease-in-out;
-  transition: 0.2s ease-in-out;
+  -webkit-transition: 0.2s linear;
+  -moz-transition: 0.2s linear;
+  -o-transition: 0.2s linear;
+  transition: 0.2s linear;
 }
 .dock-control .dock-panel.collapsed.left,
 .dock-control .dock-panel.collapsed.right {
-  min-width: 35px!important;
-  width: 35px!important;
+  min-width: 25px !important;
+  width: 25px !important;
+}
+.dock-control .dock-panel.collapsed.left .dock-content,
+.dock-control .dock-panel.collapsed.right .dock-content {
+  opacity: 0;
+}
+.dock-control .dock-panel.collapsed.left .splitter,
+.dock-control .dock-panel.collapsed.right .splitter {
+  display: none;
 }
 .dock-control .dock-panel.collapsed.left .dock-panel-title,
 .dock-control .dock-panel.collapsed.right .dock-panel-title {
@@ -98,10 +106,16 @@
   min-height: 35px !important;
   height: 35px !important;
 }
+.dock-control .dock-panel.collapsed .dock-panel-title {
+  border-bottom: none;
+}
 .dock-control .dock-panel .dock-panel-title {
   color: #ffffff;
+  border-bottom: 2px solid #007acb;
+}
+.dock-control .dock-panel .dock-panel-title span {
   background: #007acb;
-  padding: 5px 4px 4px 15px;
+  padding: 1px 15px 1px 15px;
 }
 .dock-control .dock-panel .splitter {
   width: 5px;

@@ -1,23 +1,26 @@
 <svg>
     <g class="item">
-        <rect draggable ng-width="width" ng-height="height" ng-x="x" ng-y="y" ng-class="{ selected: selected }"
-              class="box" rx="2" ry="2">
+        <rect drag="onDragItem" drag-start="onDragStartItem" ng-width="width" ng-height="height" ng-x="data.x"
+              ng-y="data.y"
+              ng-class="{ selected: data.selected }"
+              class="box" rx="2" ry="2" ng-click="itemClick({item: data, event: $event})">
         </rect>
         <!--Left connection-->
-        <circle r="5" class="connector" ng-class="property.type"
-                ng-repeat="property in inputs = (properties|filter:{direction:'input'})"
-                ng-cx="x"
-                ng-cy="y+(height/(inputs.length + 1))*($index+1)"></circle>
+        <connector ng-repeat="property in inputs = (data.properties|filter:{direction:'input'})"
+                   property="property"
+                   px="data.x"
+                   py="data.y+(height/(inputs.length + 1))*($index+1)"></connector>
         <!--Right connections-->
-        <g ng-repeat="property in outputs = (properties|filter:{direction:'output'})">
-            <circle r="5" class="connector" ng-class="property.type" ng-cx="x+width"
-                    ng-cy="y+(height/(outputs.length + 1))*($index+1)"></circle>
-            <line ng-if="property.bind" ng-x1="x+width" ng-y1="y+(height/(outputs.length + 1))*($index+1)"
+        <g ng-repeat="property in outputs = (data.properties|filter:{direction:'output'})">
+            <connector property="property"
+                       px="data.x + width"
+                       py="data.y+(height/(outputs.length + 1))*($index+1)"></connector>
+            <line ng-if="property.bind" ng-x1="data.x+width" ng-y1="data.y+(height/(outputs.length + 1))*($index+1)"
                   ng-x2="getItem(property).x" ng-y2="getItem(property).y" ng-class="property.type"/>
         </g>
 
         <!--Item text-->
-        <foreignObject ng-x="x" ng-y="y" ng-width="width" ng-height="height">
+        <foreignObject ng-x="data.x" ng-y="data.y" ng-width="width" ng-height="height">
             <div class="text-space m left top" ng-transclude>
 
             </div>

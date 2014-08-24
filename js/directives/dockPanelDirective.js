@@ -138,14 +138,26 @@ angular.module('TaskRunner.Directive.DockPanel', [])
             }
         };
     })
+    .directive('dockContent', function () {
+        return {
+            restrict: 'AE',
+            replace: true,
+            transclude: true,
+            require: '^dockPanel',
+            template: '<div class="dock-content" ng-transclude></div>',
+            link: function ($scope, element, attrs, dockPanelCtrl) {
+
+            }
+        };
+    })
     .directive('dockSplitter', function () {
         return {
             restrict: 'AE',
             replace: true,
             require: '^dockPanel',
-            template: '<div class="splitter" move="onMoving"></div>',
+            template: '<div class="splitter" drag="onDrag"></div>',
             link: function ($scope, element, attrs, dockPanelCtrl) {
-                $scope.onMoving = function (event) {
+                $scope.onDrag = function (event) {
                     dockPanelCtrl.onDragging(event);
                 };
 

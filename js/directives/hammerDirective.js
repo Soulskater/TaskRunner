@@ -10,7 +10,7 @@ angular.module('TaskRunner.Directive.Hammer', [])
                 element.hammer({
                 }).bind('tap', function (event) {
                     var func = $scope.$eval(attrs.tap);
-                    if(typeof func === 'function'){
+                    if (typeof func === 'function') {
                         func(event);
                     }
                 });
@@ -32,7 +32,7 @@ angular.module('TaskRunner.Directive.Hammer', [])
                 }).bind('tap', function (event) {
                     if (event.gesture.tapCount === 2) {
                         var func = $scope.$eval(attrs.doubleTap);
-                        if(typeof func === 'function'){
+                        if (typeof func === 'function') {
                             func(event);
                         }
                     }
@@ -45,14 +45,29 @@ angular.module('TaskRunner.Directive.Hammer', [])
                 });
             }
         };
-    }).directive('move', function () {
+    }).directive('drag', function () {
         return {
             restrict: 'A',
             replace: true,
             link: function ($scope, element, attrs) {
                 element.hammer({
                 }).bind('pan', function (event) {
-                    var func = $scope.$eval(attrs.move);
+                    var func = $scope.$eval(attrs.drag);
+                    if (func) {
+                        func(event);
+                    }
+                });
+                element.hammer({
+                    threshold: 0
+                }).bind('panstart', function (event) {
+                    var func = $scope.$eval(attrs.dragStart);
+                    if (func) {
+                        func(event);
+                    }
+                });
+                element.hammer({
+                }).bind('panend', function (event) {
+                    var func = $scope.$eval(attrs.dragEnd);
                     if (func) {
                         func(event);
                     }
@@ -61,7 +76,9 @@ angular.module('TaskRunner.Directive.Hammer', [])
                 //
                 //Disposing
                 $scope.$on('$destroy', function () {
-                    element.hammer().unbind('swipe');
+                    element.hammer().unbind('pan');
+                    element.hammer().unbind('panstart');
+                    element.hammer().unbind('panend');
                 });
             }
         };

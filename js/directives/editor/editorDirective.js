@@ -2,14 +2,12 @@
  * Created by gmeszaros on 8/5/2014.
  */
 angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
+    .constant("types", {
+        string: 'string',
+        bool: 'bool',
+        int: 'int'
+    })
     .controller("editorController", ['$scope', function ($scope) {
-
-        $scope.renderItems = function () {
-            for (var i = 0; i < $scope.items.length; i++) {
-                $scope.items[i].x = 30 + (i * 240);
-                $scope.items[i].y = 150;
-            }
-        };
 
         this.getItem = function (property) {
             if (!property.bind) {
@@ -17,7 +15,7 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
             }
 
             for (var i = 0; i < $scope.items.length; i++) {
-                if ($scope.items[i].name === property.bind.name) {
+                if ($scope.items[i].type === property.bind.name) {
                     var item = $scope.items[i];
                     for (var j = 0; j < $scope.items[i].properties.length; j++) {
                         var prop = item.properties[j];
@@ -36,6 +34,13 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
             return null;
         };
 
+        $scope.renderItems = function () {
+            for (var i = 0; i < $scope.items.length; i++) {
+                $scope.items[i].x = 30 + (i * 240);
+                $scope.items[i].y = 150;
+            }
+        };
+
         $scope.getProperties = function (item, direction) {
             var result = [];
             if (!direction) {
@@ -50,12 +55,7 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
             return result;
         };
 
-        this.onItemClick = function (item) {
-            for (var i = 0; i < $scope.items.length; i++) {
-                $scope.items[i].selected = false;
-            }
-            item.selected = true;
-        };
+        /*this*/
     }])
     .directive('editor', ["$timeout", function ($timeout) {
         return{
@@ -64,39 +64,66 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
             replace: true,
             templateUrl: 'js/directives/editor/templates/editor.tmpl.html',
             scope: {
-                width: "=",
-                height: "=",
+                //width: "=sizeX",
+                //height: "=sizeY",
                 autoSize: '=',
                 items: '='
             },
             controller: 'editorController',
             link: function ($scope, element, attrs) {
-                if ($scope.autoSize) {
-                    $timeout(function () {
-                        setSize();
-                    }, 50);
-                    $(window).resize(function () {
-                        $scope.$apply(function () {
-                            setSize();
-                        });
-                    });
-                }
+                /*if ($scope.autoSize) {
+                 $timeout(function () {
+                 setSize();
+                 }, 50);
+                 $(window).resize(function () {
+                 $scope.$apply(function () {
+                 setSize();
+                 });
+                 });
+                 }
 
-                function setSize() {
-                    $scope.width = element.parent().width();
-                    $scope.height = element.parent().height() - element.parent().offset().top;
-                }
+                 function setSize() {
+                 $scope.width = element.parent().width();
+                 $scope.height = element.parent().height() - element.parent().offset().top;
+                 }*/
+
+                $scope.$on('itemAdded', function (event, sampleItem, mouseEvent) {
+                    $scope.$apply(function () {
+                        var newItem = angular.copy(sampleItem);
+                        newItem.x = mouseEvent.gesture.center.x - element.parent().offset().left;
+                        newItem.y = mouseEvent.gesture.center.y - element.parent().offset().top;
+                        $scope.items.push(newItem);
+                        $scope.selectItem(newItem);
+                    });
+                });
+                var prevX = 0;
+                var prevY = 0;
+                $scope.onDragStartItem = function (item, event) {
+                    prevX = event.gesture.center.x - element.parent().offset().left;
+                    prevY = event.gesture.center.y - element.parent().offset().top;
+                };
+                $scope.selectItem = function (item) {
+                    for (var i = 0; i < $scope.items.length; i++) {
+                        $scope.items[i].selected = false;
+                    }
+                    item.selected = true;
+                };
+                $scope.onDragItem = function (item, event) {
+                    $scope.$apply(function () {
+                        var x = event.gesture.center.x - element.parent().offset().left;
+                        var y = event.gesture.center.y - element.parent().offset().top;
+                        item.x += x - prevX;
+                        item.y += y - prevY;
+                        prevX = x;
+                        prevY = y;
+                    });
+                };
             }
         };
     }])
     .controller("itemController", ['$scope', function ($scope) {
-        $scope.onItemClick = function (item) {
-            item.selected = true;
-            item.x = 0;
-            item.y = 0;
-        };
     }])
-    .directive('item', [function () {
+    .directive('item', [ 'types', function ($types) {
         return{
             restrict: "AE",
             require: '^editor',
@@ -107,14 +134,20 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
             scope: {
                 width: "=",
                 height: "=",
-                x: "=px",
-                y: "=py",
-                properties: '='
+                data: '=',
+                dragStartItem: '&',
+                dragItem: '&',
+                itemClick: '&'
             },
             controller: 'itemController',
             link: function ($scope, element, attrs, editorCtrl) {
-                $scope.onItemClick = editorCtrl.onItemClick;
                 $scope.getItem = editorCtrl.getItem;
+                $scope.onDragStartItem = function (event) {
+                    $scope.dragStartItem({item: $scope.data, event: event});
+                };
+                $scope.onDragItem = function (event) {
+                    $scope.dragItem({item: $scope.data, event: event});
+                };
 
                 //
                 //It needs for angular, removes svg wrapper
@@ -143,41 +176,25 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
             }
         };
     }])
-    .directive('draggable', [function () {
+    .directive('connector', ["types", function ($types) {
         return{
-            restrict: "A",
-            link: function ($scope, element, attrs) {
-
-                var currentX = 0;
-                var currentY = 0;
-
-                element.on("mousedown", selectElement);
-
-                function selectElement(evt) {
-                    currentX = evt.clientX;
-                    currentY = evt.clientY;
-
-                    element.on("mousemove", moveElement);
-                }
-
-                function moveElement(evt) {
-                    var dx = evt.clientX - currentX;
-                    var dy = evt.clientY - currentY;
-                    $scope.$apply(function () {
-                        $scope.x += dx;
-                        $scope.y += dy;
-                    });
-
-                    currentX = evt.clientX;
-                    currentY = evt.clientY;
-                }
-
-                function deselectElement(evt) {
-                    element.off("mousemove");
-                }
-
-                element.on("mouseout", deselectElement);
-                element.on("mouseup", deselectElement);
+            restrict: "AE",
+            replace: true,
+            template: '<svg><circle r="4" class="connector" ng-class="setStyle()" ng-cx="x" ng-cy="y"></circle></svg>',
+            scope: {
+                property: '=',
+                x: '=px',
+                y: '=py'
+            },
+            link: function ($scope, element, attrs, ctrl) {
+                $scope.setStyle = function () {
+                    return {
+                        string: $scope.property.type === $types.string,
+                        bool: $scope.property.type === $types.bool,
+                        int: $scope.property.type === $types.int,
+                        'un-bind': $scope.property.bind === undefined
+                    };
+                };
             }
         };
     }]);

@@ -1,8 +1,11 @@
-<svg class="editor" ng-init="renderItems()" ng-width="width" ng-height="height" preserveAspectRatio="none">
+<svg class="editor" ng-init="renderItems()" width="100%" height="100%" preserveAspectRatio="none">
     <item ng-repeat="task in items"
-          properties="task.properties"
+          drag-item="onDragItem(item, event)"
+          drag-start-item="onDragStartItem(item, event)"
+          item-click="selectItem(item, event)"
           width="150"
-          height="100" px="task.x" py="task.y">
+          height="100"
+          data="task">
         <title>{{task.type}}</title>
         <description>{{task.name}}</description>
     </item>

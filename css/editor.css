@@ -1,14 +1,16 @@
+/*Fonts*/
+/*Colors*/
 .editor {
   overflow: visible;
 }
 /* region Item*/
-.item.selected {
-  stroke: #005EB8;
-}
 .item .box {
   fill: #DBDBDB;
   stroke-width: 1;
-  stroke: #3088db;
+  stroke: #060d1e;
+}
+.item .box.selected {
+  stroke: #007acb;
 }
 .item .box-header {
   line-height: 21px;
@@ -16,11 +18,8 @@
 .item .box-header span {
   color: #282828;
 }
-.item .connector {
-  /*&:hover {
-            fill: #005EB8;
-            stroke: #005EB8;
-        }*/
+.item .connector.un-bind {
+  fill: #DBDBDB;
 }
 .string {
   fill: #db4f00;
