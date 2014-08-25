@@ -11,55 +11,119 @@
   position: absolute;
   background-color: #3B3B42;
   z-index: 10;
-  box-shadow: 1px 0px 10px #B9B9B9;
 }
 .dock-control .dock-panel.left {
   left: 0;
   top: 0;
   bottom: 0;
 }
-.dock-control .dock-panel.left .splitter {
-  right: 0;
+.dock-control .dock-panel.left > .splitter {
+  right: -5px;
   top: 0;
   bottom: 0;
   cursor: w-resize;
-}
-.dock-control .dock-panel.top {
-  left: 0;
-  right: 0;
-  top: 0;
-}
-.dock-control .dock-panel.top .splitter {
-  left: 0;
-  right: 0;
-  bottom: 0;
-  cursor: n-resize;
-  height: 3px;
-  width: auto;
+  background: #060d1e;
+  /* Old browsers */
+  background: -moz-linear-gradient(left, #060d1e 0%, #7a7a7a 30%, #7a7a7a 70%, #060d1e 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #060d1e), color-stop(30%, #7a7a7a), color-stop(70%, #7a7a7a), color-stop(100%, #060d1e));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left, #060d1e 0%, #7a7a7a 30%, #7a7a7a 70%, #060d1e 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left, #060d1e 0%, #7a7a7a 30%, #7a7a7a 70%, #060d1e 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(left, #060d1e 0%, #7a7a7a 30%, #7a7a7a 70%, #060d1e 100%);
+  /* IE10+ */
+  background: linear-gradient(to right, #060d1e 0%, #7a7a7a 30%, #7a7a7a 70%, #060d1e 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@darker', endColorstr='@darker', GradientType=1);
+  /* IE6-9 */
 }
 .dock-control .dock-panel.right {
   right: 0;
   top: 0;
   bottom: 0;
 }
-.dock-control .dock-panel.right .splitter {
-  left: 0;
+.dock-control .dock-panel.right > .splitter {
+  left: -5px;
   top: 0;
   bottom: 0;
   cursor: w-resize;
+  background: #060d1e;
+  /* Old browsers */
+  background: -moz-linear-gradient(left, #060d1e 0%, #7a7a7a 30%, #7a7a7a 70%, #060d1e 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #060d1e), color-stop(30%, #7a7a7a), color-stop(70%, #7a7a7a), color-stop(100%, #060d1e));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left, #060d1e 0%, #7a7a7a 30%, #7a7a7a 70%, #060d1e 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left, #060d1e 0%, #7a7a7a 30%, #7a7a7a 70%, #060d1e 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(left, #060d1e 0%, #7a7a7a 30%, #7a7a7a 70%, #060d1e 100%);
+  /* IE10+ */
+  background: linear-gradient(to right, #060d1e 0%, #7a7a7a 30%, #7a7a7a 70%, #060d1e 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@darker', endColorstr='@darker', GradientType=1);
+  /* IE6-9 */
+}
+.dock-control .dock-panel.top {
+  left: 0;
+  right: 0;
+  top: 0;
+}
+.dock-control .dock-panel.top > .splitter {
+  left: 0;
+  right: 0;
+  top: auto;
+  bottom: 0px;
+  cursor: n-resize;
+  height: 5px;
+  width: auto;
+  background: #060d1e;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #060d1e 0%, #7a7a7a 30%, #7a7a7a 70%, #060d1e 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #060d1e), color-stop(30%, #7a7a7a), color-stop(70%, #7a7a7a), color-stop(100%, #060d1e));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #060d1e 0%, #7a7a7a 30%, #7a7a7a 70%, #060d1e 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #060d1e 0%, #7a7a7a 30%, #7a7a7a 70%, #060d1e 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #060d1e 0%, #7a7a7a 30%, #7a7a7a 70%, #060d1e 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #060d1e 0%, #7a7a7a 30%, #7a7a7a 70%, #060d1e 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@darker', endColorstr='@darker', GradientType=0);
+  /* IE6-9 */
 }
 .dock-control .dock-panel.bottom {
   left: 0;
   right: 0;
   bottom: 0;
 }
-.dock-control .dock-panel.bottom .splitter {
+.dock-control .dock-panel.bottom > .splitter {
   left: 0;
   right: 0;
-  top: 0;
+  top: -5px;
   cursor: n-resize;
-  height: 3px;
+  height: 5px;
   width: auto;
+  background: #060d1e;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #060d1e 0%, #7a7a7a 30%, #7a7a7a 70%, #060d1e 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #060d1e), color-stop(30%, #7a7a7a), color-stop(70%, #7a7a7a), color-stop(100%, #060d1e));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #060d1e 0%, #7a7a7a 30%, #7a7a7a 70%, #060d1e 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #060d1e 0%, #7a7a7a 30%, #7a7a7a 70%, #060d1e 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #060d1e 0%, #7a7a7a 30%, #7a7a7a 70%, #060d1e 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #060d1e 0%, #7a7a7a 30%, #7a7a7a 70%, #060d1e 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@darker', endColorstr='@darker', GradientType=0);
+  /* IE6-9 */
 }
 .dock-control .dock-panel.center {
   left: 0;
@@ -82,10 +146,6 @@
 .dock-control .dock-panel.collapsed.right .dock-content {
   opacity: 0;
 }
-.dock-control .dock-panel.collapsed.left .splitter,
-.dock-control .dock-panel.collapsed.right .splitter {
-  display: none;
-}
 .dock-control .dock-panel.collapsed.left .dock-panel-title,
 .dock-control .dock-panel.collapsed.right .dock-panel-title {
   background: none;
@@ -103,41 +163,16 @@
 }
 .dock-control .dock-panel.collapsed.top,
 .dock-control .dock-panel.collapsed.bottom {
-  min-height: 35px !important;
-  height: 35px !important;
+  min-height: 25px !important;
+  height: 25px !important;
 }
 .dock-control .dock-panel.collapsed .dock-panel-title {
   border-bottom: none;
 }
 .dock-control .dock-panel .dock-panel-title {
   color: #ffffff;
-  border-bottom: 2px solid #007acb;
-}
-.dock-control .dock-panel .dock-panel-title span {
-  background: #007acb;
   padding: 1px 15px 1px 15px;
-}
-.dock-control .dock-panel .splitter {
-  width: 5px;
-  display: inline-block;
-  background: #060d1e;
-  /* Old browsers */
-  background: -moz-linear-gradient(left, #060d1e 0%, #7a7a7a 30%, #7a7a7a 70%, #060d1e 100%);
-  /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #060d1e), color-stop(30%, #7a7a7a), color-stop(70%, #7a7a7a), color-stop(100%, #060d1e));
-  /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(left, #060d1e 0%, #7a7a7a 30%, #7a7a7a 70%, #060d1e 100%);
-  /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(left, #060d1e 0%, #7a7a7a 30%, #7a7a7a 70%, #060d1e 100%);
-  /* Opera 11.10+ */
-  background: -ms-linear-gradient(left, #060d1e 0%, #7a7a7a 30%, #7a7a7a 70%, #060d1e 100%);
-  /* IE10+ */
-  background: linear-gradient(to right, #060d1e 0%, #7a7a7a 30%, #7a7a7a 70%, #060d1e 100%);
-  /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@darker', endColorstr='@darker', GradientType=1);
-  /* IE6-9 */
-  position: absolute;
-  z-index: 1;
+  border-bottom: 1px solid #007acb;
 }
 .dock-control .dock-panel .dock-container {
   position: absolute;
@@ -145,6 +180,13 @@
   bottom: 0;
   left: 0;
   right: 0;
+  overflow: hidden;
+}
+.dock-control .splitter {
+  width: 5px;
+  display: inline-block;
+  position: absolute;
+  z-index: 1;
 }
 /*Animation keyframes*/
 /* Chrome, Safari, Opera */

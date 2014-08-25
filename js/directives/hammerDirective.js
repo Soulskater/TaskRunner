@@ -51,13 +51,14 @@ angular.module('TaskRunner.Directive.Hammer', [])
             replace: true,
             link: function ($scope, element, attrs) {
                 element.hammer({
+                    threshold: 0
                 }).bind('pan', function (event) {
                     var func = $scope.$eval(attrs.drag);
                     if (func) {
                         func(event);
                     }
                 });
-                element.hammer({
+                /*element.hammer({
                     threshold: 0
                 }).bind('panstart', function (event) {
                     var func = $scope.$eval(attrs.dragStart);
@@ -66,12 +67,13 @@ angular.module('TaskRunner.Directive.Hammer', [])
                     }
                 });
                 element.hammer({
+                    threshold: 0
                 }).bind('panend', function (event) {
                     var func = $scope.$eval(attrs.dragEnd);
                     if (func) {
                         func(event);
                     }
-                });
+                });*/
 
                 //
                 //Disposing

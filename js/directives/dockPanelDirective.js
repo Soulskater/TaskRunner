@@ -12,15 +12,15 @@ angular.module('TaskRunner.Directive.DockPanel', [])
                 orientation: '@',
                 minSize: '=',
                 maxSize: '=',
-                dockStyle: '='
+                dockStyle: '=',
+                isCollapsed: '=collapsed',
+                showSplitter: '='
             },
             template: '<div class="{{ \'dock-panel \' + dockStyle}}" ng-class="{ collapsed: isCollapsed }">' +
-                '<dock-splitter></dock-splitter>' +
+                '<dock-splitter ng-if="showSplitter != false"></dock-splitter>' +
                 '<div class="dock-container" ng-transclude>' +
                 '</div>',
             controller: function ($scope) {
-                $scope.isCollapsed = false;
-
                 this.onDragging = function (event) {
                     $scope.onDragging(event);
                 };
@@ -35,78 +35,94 @@ angular.module('TaskRunner.Directive.DockPanel', [])
                 var watcher = scope.$watch("isCollapsed", function () {
                     $timeout(function () {
                         refreshSize();
-                    },200);
+                    }, 200);
                 });
 
                 var horizontal = scope.dockStyle === 'left' || scope.dockStyle === 'right';
-                var centerPanel = $("[dock-style=\"'center'\"]", element.parent('.dock-control'));
-
-                if (horizontal) {
-                    element.css({
-                        minWidth: scope.minSize + "px",
-                        maxWidth: scope.maxSize + "px"
-                    });
-                    if (scope.dockStyle === 'left')
-                        centerPanel.css({left: scope.minSize});
-                    else
-                        centerPanel.css({right: scope.minSize});
+                var nextElement;
+                if (scope.dockStyle === 'left' || scope.dockStyle === 'top') {
+                    nextElement = element.next();
                 }
                 else {
-                    element.css({
-                        minHeight: scope.minSize + "px",
-                        maxHeight: scope.maxSize + "px"
-                    });
-
-                    if (scope.dockStyle === 'top')
-                        centerPanel.css({top: scope.minSize});
-                    else
-                        centerPanel.css({bottom: scope.minSize});
+                    nextElement = element.prev();
                 }
-
+                $timeout(function () {
+                    if (horizontal) {
+                        element.css({
+                            minWidth: scope.minSize + "px",
+                            maxWidth: scope.maxSize + "px"
+                        });
+                        if (scope.dockStyle === 'left') {
+                            nextElement.css({left: scope.minSize});
+                        }
+                        else {
+                            nextElement.css({right: scope.minSize});
+                        }
+                    }
+                    else {
+                        if (attrs.size === 'auto') {
+                            if (scope.dockStyle === 'top') {
+                                element.css({bottom: nextElement.height()});
+                            }
+                            else {
+                                element.css({top: nextElement.height()});
+                            }
+                        }
+                        else {
+                            element.css({
+                                minHeight: scope.minSize + "px",
+                                maxHeight: scope.maxSize + "px"
+                            });
+                            if (scope.dockStyle === 'top') {
+                                //nextElement.css({top: element.height()});
+                            }
+                            else {
+                                nextElement.css({bottom: element.height()});
+                            }
+                        }
+                    }
+                }, 10);
                 scope.onDragging = function (event) {
                     var bounds = element[0].getBoundingClientRect();
                     var pos = 0;
-
+                    console.log("Drag!");
                     switch (scope.dockStyle) {
                         case "left":
                             pos = event.gesture.center.x - element.width();
                             element.width(element.width() + pos);
-                            centerPanel.css({left: element.width()});
+                            nextElement.css({left: element.width()});
                             break;
                         case "right":
                             pos = bounds.left - event.gesture.center.x;
                             element.width(element.width() + pos);
-                            centerPanel.css({right: element.width()});
+                            nextElement.css({right: element.width()});
                             break;
                         case "top":
                             pos = event.gesture.center.y - bounds.top;
                             element.height(pos);
-                            centerPanel.css({top: element.height()});
+                            nextElement.css({top: element.height()});
                             break;
                         case "bottom":
                             pos = bounds.top - event.gesture.center.y;
                             element.height(element.height() + pos);
-                            centerPanel.css({bottom: element.height()});
+                            nextElement.css({bottom: element.height()});
                             break;
                     }
-                    $timeout(function () {
-                        $(window).resize();
-                    });
                 };
 
                 function refreshSize() {
                     switch (scope.dockStyle) {
                         case "left":
-                            centerPanel.css({left: element.width()});
+                            nextElement.css({left: element.width()});
                             break;
                         case "right":
-                            centerPanel.css({right: element.width()});
+                            nextElement.css({right: element.width()});
                             break;
                         case "top":
-                            centerPanel.css({top: element.height()});
+                            //nextElement.css({top: element.height()});
                             break;
                         case "bottom":
-                            centerPanel.css({bottom: element.height()});
+                            nextElement.css({bottom: element.height()});
                             break;
                     }
                     $(window).resize();
@@ -124,12 +140,8 @@ angular.module('TaskRunner.Directive.DockPanel', [])
             replace: true,
             transclude: true,
             require: '^dockPanel',
-            template: '<div class="font-s dock-panel-title" double-tap="onDoubleTap" ng-transclude></div>',
+            template: '<div class="font-s dock-panel-title" ng-transclude></div>',
             link: function ($scope, element, attrs, dockPanelCtrl) {
-
-                $scope.onDoubleTap = function (event) {
-                    dockPanelCtrl.toggleCollapse();
-                };
 
                 //
                 //Disposing
@@ -155,17 +167,19 @@ angular.module('TaskRunner.Directive.DockPanel', [])
             restrict: 'AE',
             replace: true,
             require: '^dockPanel',
-            template: '<div class="splitter" drag="onDrag"></div>',
+            template: '<div class="splitter" drag="onDrag" double-tap="onDoubleTap"></div>',
             link: function ($scope, element, attrs, dockPanelCtrl) {
                 $scope.onDrag = function (event) {
                     dockPanelCtrl.onDragging(event);
                 };
 
+                $scope.onDoubleTap = function (event) {
+                    dockPanelCtrl.toggleCollapse();
+                };
+
                 //
                 //Disposing
                 $scope.$on('$destroy', function () {
-                    element.unbind('mousedown');
-                    $(document).unbind('mouseup');
                 });
             }
         };
