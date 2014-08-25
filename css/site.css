@@ -34,7 +34,8 @@ body {
 .editor-panel .title {
   border-bottom: none !important;
 }
-.editor-panel .title span {
+.editor-panel .title span,
+.editor-panel .title div {
   color: #007acb !important;
   background: none !important;
 }

@@ -2,14 +2,13 @@
  * Created by gmeszaros on 8/5/2014.
  */
 angular.module('TaskRunner', ['TaskRunner.Directive.Editor', 'TaskRunner.Directive.DockPanel', 'TaskRunner.Directive.Hammer', 'TaskRunner.Directive.TreeView'])
-    .controller('mainController', ['$scope', 'mainService', function ($scope, $service) {
-        $scope.tasks = $service.getTasks();
-        $scope.templates = $service.getTemplates();
+    .controller('TaskRunnerCtrl', ['$scope', 'mainService', function ($scope, $service) {
+        $scope.flows = $service.getFlows();
+        $scope.currentFlow = $service.getFlow();
+        $scope.toolBoxItems = $service.getToolBoxItems();
 
         $scope.onDragStart = function (item, event) {
-            return{
-                allowedObject: '.editor-container'
-            };
+
         };
 
         $scope.onDrag = function (item, event) {

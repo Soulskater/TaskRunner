@@ -6,23 +6,23 @@
               class="box" rx="2" ry="2" ng-click="itemClick({item: data, event: $event})">
         </rect>
         <!--Left connection-->
-        <connector ng-repeat="property in inputs = (data.properties|filter:{direction:'input'})"
+        <connector ng-repeat="property in data.InputProperties"
                    property="property"
                    px="data.x"
-                   py="data.y+(height/(inputs.length + 1))*($index+1)"></connector>
+                   py="data.y+(height/(data.InputProperties.length + 1))*($index+1)"></connector>
         <!--Right connections-->
-        <g ng-repeat="property in outputs = (data.properties|filter:{direction:'output'})">
+        <g ng-repeat="property in data.OutputProperties">
             <connector property="property"
                        px="data.x + width"
-                       py="data.y+(height/(outputs.length + 1))*($index+1)"></connector>
-            <line ng-if="property.bind" ng-x1="data.x+width" ng-y1="data.y+(height/(outputs.length + 1))*($index+1)"
-                  ng-x2="getItem(property).x" ng-y2="getItem(property).y" ng-class="property.type"/>
+                       py="data.y+(height/(data.OutputProperties.length + 1))*($index+1)"></connector>
+            <line ng-repeat="reference in property.References" ng-x1="data.x + width"
+                  ng-y1="data.y+(height/(data.OutputProperties.length + 1))*($parent.$index+1)"
+                  ng-x2="getItem(property, reference).x" ng-y2="getItem(property, reference).y" ng-class="property.Type"/>
         </g>
 
         <!--Item text-->
         <foreignObject ng-x="data.x" ng-y="data.y" ng-width="width" ng-height="height">
             <div class="text-space m left top" ng-transclude>
-
             </div>
         </foreignObject>
     </g>

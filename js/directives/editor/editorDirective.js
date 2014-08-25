@@ -3,28 +3,23 @@
  */
 angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
     .constant("types", {
-        string: 'string',
-        bool: 'bool',
-        int: 'int'
+        string: 'String',
+        bool: 'Bool',
+        int: 'Number'
     })
     .controller("editorController", ['$scope', function ($scope) {
 
-        this.getItem = function (property) {
-            if (!property.bind) {
-                return null;
-            }
-
+        this.getItem = function (property, reference) {
             for (var i = 0; i < $scope.items.length; i++) {
-                if ($scope.items[i].type === property.bind.name) {
+                if ($scope.items[i].Id === reference.TaskId) {
                     var item = $scope.items[i];
-                    for (var j = 0; j < $scope.items[i].properties.length; j++) {
-                        var prop = item.properties[j];
-                        if (prop.name === property.bind.field) {
-                            var props = $scope.getProperties(item, prop.direction);
-                            var index = props.indexOf(prop);
+                    var props = property.Direction === "input" ? item.OutputProperties : item.InputProperties;
+                    for (var j = 0; j < props.length; j++) {
+                        var prop = props[j];
+                        if (prop.Name === reference.ReferenceProperty) {
                             return {
                                 x: item.x,
-                                y: item.y + (100 / (props.length + 1)) * (index + 1),//y+(height/(outputs.length + 1))*($index+1)
+                                y: item.y + (100 / (props.length + 1)) * (j + 1),
                                 property: prop
                             };
                         }
@@ -64,8 +59,6 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
             replace: true,
             templateUrl: 'js/directives/editor/templates/editor.tmpl.html',
             scope: {
-                //width: "=sizeX",
-                //height: "=sizeY",
                 autoSize: '=',
                 items: '='
             },
@@ -189,10 +182,10 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
             link: function ($scope, element, attrs, ctrl) {
                 $scope.setStyle = function () {
                     return {
-                        string: $scope.property.type === $types.string,
-                        bool: $scope.property.type === $types.bool,
-                        int: $scope.property.type === $types.int,
-                        'un-bind': $scope.property.bind === undefined
+                        string: $scope.property.PropertyValueType === $types.string,
+                        bool: $scope.property.PropertyValueType === $types.bool,
+                        int: $scope.property.PropertyValueType === $types.int,
+                        'un-bind': $scope.property.Direction === "input" ? $scope.property.Reference === null : $scope.property.References === null
                     };
                 };
             }

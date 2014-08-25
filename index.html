@@ -1,61 +1,73 @@
 </dock-panel>
 <!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Task Runner</title>
-    <link href="css/bootstrap.css" type="text/css" rel="stylesheet">
-    <link href="css/common.css" type="text/css" rel="stylesheet">
-    <link href="css/editor.css" type="text/css" rel="stylesheet">
-    <link href="css/dockPanel.css" type="text/css" rel="stylesheet">
-    <link href="css/treeview.css" type="text/css" rel="stylesheet">
-    <link href="css/site.css" type="text/css" rel="stylesheet">
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Task Runner</title>
+        <link href="css/bootstrap.css" type="text/css" rel="stylesheet">
+        <link href="css/common.css" type="text/css" rel="stylesheet">
+        <link href="css/editor.css" type="text/css" rel="stylesheet">
+        <link href="css/dockPanel.css" type="text/css" rel="stylesheet">
+        <link href="css/treeview.css" type="text/css" rel="stylesheet">
+        <link href="css/site.css" type="text/css" rel="stylesheet">
 
-    <script src="js/lib/jquery-2.1.1.js" type="text/javascript"></script>
-    <script src="js/lib/angular.js" type="text/javascript"></script>
-    <script src="js/lib/bootstrap.js" type="text/javascript"></script>
-    <script src="js/lib/hammer.min.js" type="text/javascript"></script>
-    <script src="js/lib/jquery.hammer.js" type="text/javascript"></script>
+        <script src="js/lib/jquery-2.1.1.js" type="text/javascript"></script>
+        <script src="js/lib/angular.js" type="text/javascript"></script>
+        <script src="js/lib/bootstrap.js" type="text/javascript"></script>
+        <script src="js/lib/hammer.min.js" type="text/javascript"></script>
+        <script src="js/lib/jquery.hammer.js" type="text/javascript"></script>
 
-    <script src="js/taskRunnerCtrl.js" type="text/javascript"></script>
-    <script src="js/taskRunnerService.js" type="text/javascript"></script>
-    <script src="js/directives/hammerDirective.js" type="text/javascript"></script>
-    <script src="js/directives/svgDirective.js" type="text/javascript"></script>
-    <script src="js/directives/editor/editorDirective.js" type="text/javascript"></script>
-    <script src="js/directives/dockPanelDirective.js" type="text/javascript"></script>
-    <script src="js/directives/treeview/treeViewDirective.js" type="text/javascript"></script>
-</head>
-<body ng-app="TaskRunner">
-<div class="header font-xl text-space left xl">
-    Task Runner
-</div>
-<div class="page-wrapper" ng-controller="mainController">
-    <!--Menu-->
-    <!--Content-->
-    <dock-control>
-        <dock-panel class="tool-panel" dock-style="'left'" min-size="200">
-            <dock-title>
-                Templates
-            </dock-title>
-            <dock-content>
-                <tree-view class="text-space m top" items="templates" drag-target="'.editor'" drag-item="onDrag()"
-                           drag-start="onDragStart(item, event)" drag-end="onDragEnd(item, event)"
-                           group-field="'namespace'">
-                </tree-view>
-            </dock-content>
-        </dock-panel>
-        <dock-panel dock-style="'center'" class="editor-panel">
-            <dock-title class="font-m title">Visual Designer</dock-title>
-            <dock-content class="editor-container">
-                <editor size-x="100%" size-y="100%" items="tasks" auto-size="false">
+        <script src="js/taskRunnerCtrl.js" type="text/javascript"></script>
+        <script src="js/taskRunnerService.js" type="text/javascript"></script>
+        <script src="js/directives/hammerDirective.js" type="text/javascript"></script>
+        <script src="js/directives/svgDirective.js" type="text/javascript"></script>
+        <script src="js/directives/editor/editorDirective.js" type="text/javascript"></script>
+        <script src="js/directives/dockPanelDirective.js" type="text/javascript"></script>
+        <script src="js/directives/treeview/treeViewDirective.js" type="text/javascript"></script>
+    </head>
+    <body ng-app="TaskRunner">
+        <div class="header font-xl text-space left xl">
+            Task Runner
+        </div>
+        <div class="page-wrapper" ng-controller="TaskRunnerCtrl">
+            <!--Menu-->
+            <!--Content-->
+            <dock-control>
+                <dock-panel class="tool-panel" dock-style="'left'" dock-behaviour="splitVertical" min-size="200">
+                    <dock-panel>
+                        <dock-title>
+                            Flows
+                        </dock-title>
+                        <dock-content>
+                        </dock-content>
+                    </dock-panel>
+                    <dock-panel>
+                        <dock-title>
+                            ToolBox
+                        </dock-title>
+                        <dock-content>
+                            <tree-view class="text-space m top" items="toolBoxItems" drag-target="'.editor'"
+                                       drag-item="onDrag()"
+                                       drag-start="onDragStart(item, event)" drag-end="onDragEnd(item, event)"
+                                       group-field="'Namespace'">
+                            </tree-view>
+                        </dock-content>
+                    </dock-panel>
+                </dock-panel>
+                <dock-panel dock-style="'center'" class="editor-panel">
+                    <dock-title class="font-m title text-space m top">Visual Designer
+                        <div class="font-s text-space l left ">Current Flow: {{currentFlow.DisplayName}}</div>
+                    </dock-title>
+                    <dock-content class="editor-container">
+                        <editor size-x="100%" size-y="100%" items="currentFlow.Tasks" auto-size="false">
 
-                </editor>
-            </dock-content>
-        </dock-panel>
-        <dock-panel class="tool-panel" dock-style="'right'" min-size="200">
-            <dock-title>Properties</dock-title>
-        </dock-panel>
-    </dock-control>
-</div>
-</body>
+                        </editor>
+                    </dock-content>
+                </dock-panel>
+                <dock-panel class="tool-panel" dock-style="'right'" min-size="200">
+                    <dock-title>Properties</dock-title>
+                </dock-panel>
+            </dock-control>
+        </div>
+    </body>
 </html>
