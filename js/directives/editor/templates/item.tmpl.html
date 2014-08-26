@@ -7,17 +7,18 @@
         </rect>
         <!--Left connection-->
         <connector ng-repeat="property in data.InputProperties"
+                   item-id="data.Id"
                    property="property"
                    px="data.x"
                    py="data.y+(height/(data.InputProperties.length + 1))*($index+1)"></connector>
         <!--Right connections-->
         <g ng-repeat="property in data.OutputProperties">
-            <connector property="property"
+            <connector item-id="data.Id" property="property"
                        px="data.x + width"
                        py="data.y+(height/(data.OutputProperties.length + 1))*($index+1)"></connector>
-            <line ng-repeat="reference in property.References" ng-x1="data.x + width"
+            <line class="connector" ng-repeat="reference in property.References" ng-x1="data.x + width"
                   ng-y1="data.y+(height/(data.OutputProperties.length + 1))*($parent.$index+1)"
-                  ng-x2="getItem(property, reference).x" ng-y2="getItem(property, reference).y" ng-class="property.Type"/>
+                  ng-x2="getItem(property, reference).x" ng-y2="getItem(property, reference).y" ng-class="property.PropertyValueType"/>
         </g>
 
         <!--Item text-->

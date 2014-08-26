@@ -9,14 +9,15 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
     })
     .controller("editorController", ['$scope', function ($scope) {
 
+        var dragProperty = null;
         this.getItem = function (property, reference) {
             for (var i = 0; i < $scope.items.length; i++) {
-                if ($scope.items[i].Id === reference.TaskId) {
+                if ($scope.items[i].Id === reference.Key) {
                     var item = $scope.items[i];
                     var props = property.Direction === "input" ? item.OutputProperties : item.InputProperties;
                     for (var j = 0; j < props.length; j++) {
                         var prop = props[j];
-                        if (prop.Name === reference.ReferenceProperty) {
+                        if (prop.PropertyName === reference.Value) {
                             return {
                                 x: item.x,
                                 y: item.y + (100 / (props.length + 1)) * (j + 1),
@@ -27,6 +28,42 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
                 }
             }
             return null;
+        };
+
+        this.propertyDragStart = function (itemId, property) {
+            dragProperty = { itemId: itemId, property: property};
+        };
+
+        this.propertyDragEnd = function (itemId, property) {
+            if (!dragProperty) {
+                return;
+            }
+            if (dragProperty.property.Direction === "input") {
+                dragProperty.property.Reference = {
+                    Key: itemId,
+                    Value: property.PropertyName
+                };
+                if (!property.References) {
+                    property.References = [];
+                }
+                property.References.push({
+                    Key: dragProperty.itemId,
+                    Value: dragProperty.property.PropertyName
+                });
+            }
+            else {
+                if (!dragProperty.property.References) {
+                    dragProperty.property.References = [];
+                }
+                dragProperty.property.References.push({
+                    Key: itemId,
+                    Value: property.PropertyName
+                });
+                property.Reference = {
+                    Key: dragProperty.itemId,
+                    Value: dragProperty.property.PropertyName
+                };
+            }
         };
 
         $scope.renderItems = function () {
@@ -49,10 +86,9 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
             }
             return result;
         };
-
-        /*this*/
     }])
-    .directive('editor', ["$timeout", function ($timeout) {
+    .
+    directive('editor', ["$timeout", function ($timeout) {
         return{
             restrict: "AE",
             transclude: false,
@@ -177,21 +213,34 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
         return{
             restrict: "AE",
             replace: true,
-            template: '<svg><circle r="4" class="connector" ng-class="setStyle()" ng-cx="x" ng-cy="y"></circle></svg>',
+            require: '^editor',
+            template: '<svg><circle r="4" class="connector" ng-class="setStyle()" ng-cx="x" ng-cy="y" ng-mousedown="startDrag()" ng-mouseup="endDrag()"></circle></svg>',
             scope: {
+                itemId: '=',
                 property: '=',
                 x: '=px',
                 y: '=py'
             },
-            link: function ($scope, element, attrs, ctrl) {
+            link: function ($scope, element, attrs, editorCtrl) {
                 $scope.setStyle = function () {
                     return {
                         string: $scope.property.PropertyValueType === $types.string,
                         bool: $scope.property.PropertyValueType === $types.bool,
-                        int: $scope.property.PropertyValueType === $types.int,
+                        number: $scope.property.PropertyValueType === $types.int,
                         'un-bind': $scope.property.Direction === "input" ? $scope.property.Reference === null : $scope.property.References === null
                     };
                 };
+                $scope.startDrag = function () {
+                    editorCtrl.propertyDragStart($scope.itemId, $scope.property);
+                };
+                $scope.endDrag = function () {
+                    editorCtrl.propertyDragEnd($scope.itemId, $scope.property);
+                };
+
+                //
+                //It needs for angular, removes svg wrapper
+                var e = angular.element(element.children());
+                element.replaceWith(e);
             }
         };
     }]);

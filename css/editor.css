@@ -18,6 +18,12 @@
 .item .box-header span {
   color: #282828;
 }
+.item .connector {
+  cursor: pointer;
+}
+.item .connector:hover {
+  stroke-width: 5px;
+}
 .item .connector.un-bind {
   fill: #DBDBDB;
 }
@@ -25,7 +31,7 @@
   fill: #db4f00;
   stroke: #db4f00;
 }
-.int {
+.number {
   fill: #3088db;
   stroke: #3088db;
 }

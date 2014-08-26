@@ -1,0 +1,63 @@
+<dock-title>Task Properties</dock-title>
+<dock-content class="font-xs text-space s left right">
+    <div ng-if="!selectedTask">
+        <h3 class="font-m text-center">No task selected</h3>
+    </div>
+    <div ng-if="selectedTask">
+        <h3 class="font-m space s top">General</h3>
+        <label>Name</label>
+        <input type="text" ng-model="selectedTask.DisplayText"/>
+        <!-- Input properties-->
+        <h3 class="font-m space s top">Input Properties</h3>
+
+        <div class="space m bottom" ng-repeat="property in selectedTask.InputProperties">
+            <label title={{property.HintText}}>{{property.LabelText}}</label><br/>
+            <table class="settings font-xs space s left">
+                <tr>
+                    <td class=""><label>Default Value</label></td>
+                    <td class="text-space s right">
+                        <control control-type="property.PropertyValueType"
+                                 bind-property="property.DefaultValue"></control>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-space s right"><label>Value</label></td>
+                    <td class="text-space s right">
+                        <control control-type="property.PropertyValueType" bind-property="property.Value"></control>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-space s right"><label>Required</label></td>
+                    <td class="text-space s right text-left"><input type="checkbox" ng-model="property.Required"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Output properties-->
+        <h3 class="font-m space s top">Output Properties</h3>
+
+        <div class="space m bottom" ng-repeat="property in selectedTask.OutputProperties">
+            <label title={{property.HintText}}>{{property.LabelText}}</label><br/>
+            <table class="settings font-xs space s left">
+                <tr>
+                    <td class=""><label>Default Value</label></td>
+                    <td class="text-space s right">
+                        <control control-type="property.PropertyValueType"
+                                 bind-property="property.DefaultValue"></control>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label>Value</label></td>
+                    <td class="text-space s right"><input type="text" ng-model="property.Value"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-space s right"><label>Required</label></td>
+                    <td class="text-space s right text-left"><input type="text" ng-model="property.Required"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</dock-content>

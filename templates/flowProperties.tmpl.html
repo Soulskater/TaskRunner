@@ -1,0 +1,32 @@
+<dock-title>Flow Properties</dock-title>
+<dock-content class="font-xs text-space s left right">
+    <div ng-if="!currentFlow">
+        <h3 class="font-m text-center">No flow selected</h3>
+    </div>
+    <div ng-if="currentFlow">
+        <h3 class="font-m space s top">General</h3>
+        <label>Name</label>
+        <input type="text" ng-model="currentFlow.DisplayName"/>
+
+        <h3 class="font-m">Settings <span tap="addNewSetting"
+                                          class="add-setting pull-right text-space s right">+</span>
+        </h3>
+        <table class="settings font-xs">
+            <tr ng-repeat="property in currentFlow.Properties">
+                <td class="text-space s right"><input type="text"
+                                                      ng-repeat="(key, value) in property"
+                                                      ng-model="key"/></td>
+                <td><input type="text" ng-repeat="(key, value) in property" ng-model="value"/>
+                </td>
+            </tr>
+        </table>
+
+        <h3 class="font-m">User Settings</h3>
+        <table class="settings font-xs">
+            <tr ng-repeat="property in userInfo.Properties">
+                <td><label ng-repeat="(key, value) in property">{{key}}</label></td>
+                <td><label ng-repeat="(key, value) in property">{{value}}</label></td>
+            </tr>
+        </table>
+    </div>
+</dock-content>

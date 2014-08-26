@@ -29,6 +29,11 @@
   }
 
   .connector {
+    cursor: pointer;
+
+    &:hover {
+      stroke-width: 5px;
+    }
     &.un-bind {
       fill: #DBDBDB;
     }
@@ -41,7 +46,7 @@
   stroke: @string-color;
 }
 
-.int {
+.number {
   fill: @int-color;
   stroke: @int-color;
 }

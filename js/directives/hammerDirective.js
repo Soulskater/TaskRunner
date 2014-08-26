@@ -52,10 +52,8 @@ angular.module('TaskRunner.Directive.Hammer', [])
             restrict: 'A',
             replace: true,
             link: function ($scope, element, attrs) {
-                console.log('Drag added!');
                 element.hammer({
                 }).bind('panmove', function (event) {
-                    console.log("drag!!");
                     var func = $scope.$eval(attrs.drag);
                     if (func) {
                         func(event);
@@ -63,7 +61,6 @@ angular.module('TaskRunner.Directive.Hammer', [])
                 });
                 element.hammer({
                 }).bind('panstart', function (event) {
-                    console.log("dragstart!!");
                     var func = $scope.$eval(attrs.dragStart);
                     if (func) {
                         func(event);
@@ -71,7 +68,6 @@ angular.module('TaskRunner.Directive.Hammer', [])
                 });
                 element.hammer({
                 }).bind('panend', function (event) {
-                    console.log("dragend!!");
                     var func = $scope.$eval(attrs.dragEnd);
                     if (func) {
                         func(event);
