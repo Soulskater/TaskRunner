@@ -11,7 +11,9 @@ angular.module('TaskRunner.Directive.Hammer', [])
                 }).bind('tap', function (event) {
                     var func = $scope.$eval(attrs.tap);
                     if (typeof func === 'function') {
-                        func(event);
+                        $scope.$apply(function () {
+                            func(event);
+                        });
                     }
                 });
 
@@ -50,35 +52,36 @@ angular.module('TaskRunner.Directive.Hammer', [])
             restrict: 'A',
             replace: true,
             link: function ($scope, element, attrs) {
+                console.log('Drag added!');
                 element.hammer({
-                    threshold: 0
-                }).bind('pan', function (event) {
+                }).bind('panmove', function (event) {
+                    console.log("drag!!");
                     var func = $scope.$eval(attrs.drag);
                     if (func) {
                         func(event);
                     }
                 });
-                /*element.hammer({
-                    threshold: 0
+                element.hammer({
                 }).bind('panstart', function (event) {
+                    console.log("dragstart!!");
                     var func = $scope.$eval(attrs.dragStart);
                     if (func) {
                         func(event);
                     }
                 });
                 element.hammer({
-                    threshold: 0
                 }).bind('panend', function (event) {
+                    console.log("dragend!!");
                     var func = $scope.$eval(attrs.dragEnd);
                     if (func) {
                         func(event);
                     }
-                });*/
+                });
 
                 //
                 //Disposing
                 $scope.$on('$destroy', function () {
-                    element.hammer().unbind('pan');
+                    element.hammer().unbind('panmove');
                     element.hammer().unbind('panstart');
                     element.hammer().unbind('panend');
                 });

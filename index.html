@@ -1,79 +1,176 @@
 </dock-panel>
 <!DOCTYPE html>
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>Task Runner</title>
-    <link href="css/bootstrap.css" type="text/css" rel="stylesheet">
-    <link href="css/common.css" type="text/css" rel="stylesheet">
-    <link href="css/editor.css" type="text/css" rel="stylesheet">
-    <link href="css/dockPanel.css" type="text/css" rel="stylesheet">
-    <link href="css/treeview.css" type="text/css" rel="stylesheet">
-    <link href="css/site.css" type="text/css" rel="stylesheet">
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Task Runner</title>
+        <link href="css/bootstrap.css" type="text/css" rel="stylesheet">
+        <link href="css/common.css" type="text/css" rel="stylesheet">
+        <link href="css/editor.css" type="text/css" rel="stylesheet">
+        <link href="css/dockPanel.css" type="text/css" rel="stylesheet">
+        <link href="css/treeview.css" type="text/css" rel="stylesheet">
+        <link href="css/site.css" type="text/css" rel="stylesheet">
 
-    <script src="js/lib/jquery-2.1.1.js" type="text/javascript"></script>
-    <script src="js/lib/angular.js" type="text/javascript"></script>
-    <script src="js/lib/bootstrap.js" type="text/javascript"></script>
-    <script src="js/lib/hammer.min.js" type="text/javascript"></script>
-    <script src="js/lib/jquery.hammer.js" type="text/javascript"></script>
+        <script src="js/lib/jquery-2.1.1.js" type="text/javascript"></script>
+        <script src="js/lib/angular.js" type="text/javascript"></script>
+        <script src="js/lib/bootstrap.js" type="text/javascript"></script>
+        <script src="js/lib/hammer.min.js" type="text/javascript"></script>
+        <script src="js/lib/jquery.hammer.js" type="text/javascript"></script>
 
-    <script src="js/taskRunnerCtrl.js" type="text/javascript"></script>
-    <script src="js/taskRunnerService.js" type="text/javascript"></script>
-    <script src="js/directives/hammerDirective.js" type="text/javascript"></script>
-    <script src="js/directives/svgDirective.js" type="text/javascript"></script>
-    <script src="js/directives/editor/editorDirective.js" type="text/javascript"></script>
-    <script src="js/directives/dockPanelDirective.js" type="text/javascript"></script>
-    <script src="js/directives/treeview/treeViewDirective.js" type="text/javascript"></script>
-</head>
-<body ng-app="TaskRunner">
-<div class="header font-xl text-space left xl">
-    Task Runner
-</div>
-<div class="page-wrapper" ng-controller="TaskRunnerCtrl">
-    <!--Menu-->
-    <!--Content-->
-    <dock-control>
-        <dock-panel dock-style="'top'" size="auto" show-splitter="false">
-            <dock-panel class="tool-panel" dock-style="'left'" min-size="200" collapsed="false">
-                <dock-panel class="" dock-style="'top'" min-size="100" collapsed="false">
-                    <dock-title>
-                        Flows
-                    </dock-title>
-                    <dock-content>
+        <script src="js/taskRunnerCtrl.js" type="text/javascript"></script>
+        <script src="js/taskRunnerService.js" type="text/javascript"></script>
+        <script src="js/directives/hammerDirective.js" type="text/javascript"></script>
+        <script src="js/directives/svgDirective.js" type="text/javascript"></script>
+        <script src="js/directives/editor/editorDirective.js" type="text/javascript"></script>
+        <script src="js/directives/dockPanelDirective.js" type="text/javascript"></script>
+        <script src="js/directives/treeview/treeViewDirective.js" type="text/javascript"></script>
+        <script src="js/directives/controlDirective.js" type="text/javascript"></script>
+    </head>
+    <body ng-app="TaskRunner" ng-controller="TaskRunnerCtrl">
+        <div class="header font-xl text-space left xl">
+            Task Runner
+    <span class="font-m pull-right text-right user-info text-space m right">
+        {{data.userInfo.FirstName}}<br/>{{data.userInfo.LastName}}
+    </span>
+        </div>
+        <div class="page-wrapper">
+            <!--Menu-->
+            <!--Content-->
+            <dock-control>
+                <dock-panel dock-style="'top'" size="auto" show-splitter="false">
+                    <!--Toolbox/Flows -->
+                    <dock-panel class="tool-panel" dock-style="'left'" min-size="250" collapsed="false">
+                        <!--Flows-->
+                        <dock-panel class="" dock-style="'top'" min-size="100" collapsed="false">
+                            <dock-title>
+                                Flows
+                            </dock-title>
+                            <dock-content>
+                                <div class="font-s bottom flows">
+                                    <div class="flow-item" ng-repeat="flow in data.flows" ng-dblclick="selectFlow(flow)">
+                                    {{flow.DisplayName}}
+                                    </div>
+                                </div>
+                            </dock-content>
+                        </dock-panel>
+                        <!--ToolBox-->
+                        <dock-panel class="" dock-style="'bottom'" min-size="200" collapsed="false"
+                                    show-splitter="false">
+                            <dock-title>
+                                ToolBox
+                            </dock-title>
+                            <dock-content>
+                                <tree-view class="text-space m top" items="data.tasks" drag-target="'.editor'"
+                                           drag-item="onDrag()"
+                                           drag-start="onDragStart(item, event)" drag-end="onDragEnd(item, event)"
+                                           group-fields="'Groups'">
+                                </tree-view>
+                            </dock-content>
+                        </dock-panel>
+                    </dock-panel>
+                    <!--Editor-->
+                    <dock-panel dock-style="'center'" class="editor-panel" show-splitter="false">
+                        <dock-title class="font-m title text-space m top" tap="toggleFlowSelected">Visual Designer
+                            <div class="font-s">Current Flow: {{currentFlow.DisplayName}}</div>
+                            <div ng-class="{ selector: flowSelected }"></div>
+                        </dock-title>
+                        <dock-content class="editor-container">
+                            <editor ng-if="currentFlow" size-x="100%" size-y="100%" items="currentFlow.Tasks"
+                                    selected-changed="selectedTaskChanged(task)" auto-size="false">
+                            </editor>
+                        </dock-content>
+                    </dock-panel>
+                    <!--Properties-->
+                    <dock-panel class="tool-panel" dock-style="'right'" min-size="320" collapsed="false">
+                        <div ng-if="flowSelected">
+                            <dock-title>Flow Properties</dock-title>
+                            <dock-content class="font-xs text-space s left right">
+                                <h3 class="font-m space s top">General</h3>
+                                <label>Name</label>
+                                <input type="text" ng-model="currentFlow.DisplayName"/>
 
-                    </dock-content>
+                                <h3 class="font-m">Settings <span tap="addNewSetting"
+                                                                  class="add-setting pull-right text-space s right">+</span>
+                                </h3>
+                                <table class="settings font-xs">
+                                    <tr ng-repeat="property in currentFlow.Properties">
+                                        <td class="text-space s right"><input type="text"
+                                                                              ng-repeat="(key, value) in property"
+                                                                              ng-model="key"/></td>
+                                        <td><input type="text" ng-repeat="(key, value) in property" ng-model="value"/>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <h3 class="font-m">User Settings</h3>
+                                <table class="settings font-xs">
+                                    <tr ng-repeat="property in userInfo.Properties">
+                                        <td><label ng-repeat="(key, value) in property">{{key}}</label></td>
+                                        <td><label ng-repeat="(key, value) in property">{{value}}</label></td>
+                                    </tr>
+                                </table>
+                            </dock-content>
+                        </div>
+                        <div ng-if="!flowSelected">
+                            <dock-title>Task Properties</dock-title>
+                            <dock-content class="font-xs text-space s left right">
+                                <h3 class="font-m space s top">General</h3>
+                                <label>Name</label>
+                                <input type="text" ng-model="selectedTask.DisplayText"/>
+                                <!-- Input properties-->
+                                <h3 class="font-m space s top">Input Properties</h3>
+                                <div class="space m bottom" ng-repeat="property in selectedTask.InputProperties">
+                                    <label title={{property.HintText}}>{{property.LabelText}}</label><br/>
+                                    <table class="settings font-xs space s left">
+                                        <tr>
+                                            <td class=""><label>Default Value</label></td>
+                                            <td class="text-space s right"><control control-type="property.PropertyValueType" bind-property="property.DefaultValue"></control>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-space s right"><label>Value</label></td>
+                                            <td class="text-space s right"><control control-type="property.PropertyValueType" bind-property="property.Value"></control>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-space s right"><label>Required</label></td>
+                                            <td class="text-space s right text-left"><input type="checkbox" ng-model="property.Required"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <!-- Output properties-->
+                                <h3 class="font-m space s top">Output Properties</h3>
+                                <div class="space m bottom" ng-repeat="property in selectedTask.OutputProperties">
+                                    <label title={{property.HintText}}>{{property.LabelText}}</label><br/>
+                                    <table class="settings font-xs space s left">
+                                        <tr>
+                                            <td class=""><label>Default Value</label></td>
+                                            <td class="text-space s right"><control control-type="property.PropertyValueType" bind-property="property.DefaultValue"></control>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><label>Value</label></td>
+                                            <td class="text-space s right"><input type="text" ng-model="property.Value"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-space s right"><label>Required</label></td>
+                                            <td class="text-space s right text-left"><input type="text" ng-model="property.Required"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </dock-content>
+                        </div>
+                    </dock-panel>
                 </dock-panel>
-                <dock-panel class="" dock-style="'bottom'" min-size="200" show-splitter="false" collapsed="false">
-                    <dock-title>
-                        ToolBox
-                    </dock-title>
-                    <dock-content>
-                        <tree-view class="text-space m top" items="toolBoxItems" drag-target="'.editor'"
-                                   drag-item="onDrag()"
-                                   drag-start="onDragStart(item, event)" drag-end="onDragEnd(item, event)"
-                                   group-field="'Namespace'">
-                        </tree-view>
-                    </dock-content>
+                <!--Console-->
+                <dock-panel dock-style="'bottom'" min-size="200" collapsed="true">
+                    <dock-title>Console</dock-title>
                 </dock-panel>
-            </dock-panel>
-            <dock-panel dock-style="'center'" class="editor-panel">
-                <dock-title class="font-m title text-space m top">Visual Designer
-                    <div class="font-s">Current Flow: {{currentFlow.DisplayName}}</div>
-                </dock-title>
-                <dock-content class="editor-container">
-                    <editor size-x="100%" size-y="100%" items="currentFlow.Tasks" auto-size="false">
-
-                    </editor>
-                </dock-content>
-            </dock-panel>
-            <dock-panel class="tool-panel" dock-style="'right'" min-size="200" collapsed="false">
-                <dock-title>Properties</dock-title>
-            </dock-panel>
-        </dock-panel>
-        <dock-panel dock-style="'bottom'" min-size="200" collapsed="true">
-            <dock-title>Console</dock-title>
-        </dock-panel>
-    </dock-control>
-</div>
-</body>
+            </dock-control>
+        </div>
+    </body>
 </html>

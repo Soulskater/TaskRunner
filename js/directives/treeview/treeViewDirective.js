@@ -10,7 +10,7 @@ angular.module('TaskRunner.Directive.TreeView', [])
             templateUrl: 'js/directives/treeview/templates/treeview.tmpl.html',
             scope: {
                 items: "=",
-                groupField: "=",
+                groupFields: "=",
                 dragTarget: '=',
                 dragItem: "&",
                 dragStart: "&",
@@ -30,8 +30,8 @@ angular.module('TaskRunner.Directive.TreeView', [])
                 };
             },
             compile: function (tElement, tAttrs, transclude) {
-                function groupDatasource(items, groupfield) {
-                    if (!groupfield) {
+                function groupDatasource(items, groupfields) {
+                    if (!groupfields) {
                         return [
                             {
                                 name: '',
@@ -44,28 +44,42 @@ angular.module('TaskRunner.Directive.TreeView', [])
                     var keys = [];
                     for (var i = 0; i < items.length; i++) {
                         var item = items[i];
-                        if (keys.indexOf(item[groupfield]) === -1) {
-                            keys.push(item[groupfield]);
+                        updateGroups(item[groupfields], item, keys, groups);
+                    }
+                    return groups;
+                }
+
+                function updateGroups(groupfields, item, keys, groups) {
+                    for (var i = 0; i < groupfields.length; i++) {
+                        if (keys.indexOf(groupfields[i]) === -1) {
+                            keys.push(groupfields[i]);
                             groups.push({
-                                name: item[groupfield],
+                                name: groupfields[i],
                                 collapsed: false,
                                 items: [item]
                             });
                         }
                         else {
-                            var group = groups[keys.indexOf(item[groupfield])];
+                            var group = groups[keys.indexOf(groupfields[i])];
                             group.items.push(item);
                         }
                     }
-                    return groups;
                 }
 
                 return {
                     pre: function ($scope, element, attrs) {
-                        $scope.groups = groupDatasource($scope.items, $scope.groupField);
+                        var watcher = $scope.$watch("items", function () {
+                            $scope.groups = groupDatasource($scope.items, $scope.groupFields);
+                        });
                         $scope.collapseGroup = function (group) {
                             group.collapsed = !group.collapsed;
                         };
+
+                        //
+                        //Disposing
+                        $scope.$on('$destroy', function () {
+                            watcher();
+                        });
                     },
                     post: function ($scope, element, attrs) {
 

@@ -1,12 +1,13 @@
-<svg class="editor" ng-init="renderItems()" width="100%" height="100%" preserveAspectRatio="none">
-    <item ng-repeat="task in items"
-          drag-item="onDragItem(item, event)"
-          drag-start-item="onDragStartItem(item, event)"
-          item-click="selectItem(item, event)"
-          width="150"
-          height="100"
-          data="task">
-        <title>{{task.DisplayText}}</title>
-        <description>{{task.UserGivenDisplayName}}</description>
-    </item>
+<svg class="editor" width="100%" height="100%" preserveAspectRatio="none">
+    <g ng-repeat="task in items">
+        <item drag-item="onDragItem(item, event)"
+              drag-start-item="onDragStartItem(item, event)"
+              item-click="selectItem(item, event)"
+              width="150"
+              height="100"
+              data="task">
+            <title>{{task.DisplayText}}</title>
+            <description>{{task.UserGivenDisplayName}}</description>
+        </item>
+    </g>
 </svg>

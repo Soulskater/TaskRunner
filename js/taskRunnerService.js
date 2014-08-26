@@ -5,167 +5,40 @@ angular.module('TaskRunner')
     .service('mockService', ['$q', function ($q) {
         return{
             getMockTasks: function () {
-                var tasks = [
-                    {
-                        "DisplayText": "Add",
-                        "Groups": ["Calculator"],
-                        "DotNetType": "TaskRunner.Plugin.Samples.Calculator.Add",
-                        "ContainerAssembly": "TaskRunner.Plugin.Samples, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-                        "InputProperties": [
-                            {
-                                "PropertyName": "Number1",
-                                "LabelText": "Number 1",
-                                "HintText": "The first number to add",
-                                "Required": true,
-                                "DefaultValue": "0",
-                                "PropertyValueType": "Number",
-                                "Value": null,
-                                "Reference": null,
-                                "Direction": "input"
-                            },
-                            {"PropertyName": "Number2", "LabelText": "Number 2", "HintText": "The second number to add", "Required": true, "DefaultValue": "0", "PropertyValueType": "Number", "Value": null, "Reference": null, "Direction": "input"},
-                            {"PropertyName": "Number3", "LabelText": "Number 2", "HintText": "The third number to add", "Required": false, "DefaultValue": "0", "PropertyValueType": "Number", "Value": null, "Reference": null, "Direction": "input"}
-                        ],
-                        "OutputProperties": [
-                            {"LabelText": "Result", "ShortDescription": null, "References": null ,"Direction": "output", "PropertyValueType": "Number"}
-                        ],
-                        "Id": "00000000-0000-0000-0000-000000000000",
-                        "UserGivenDisplayName": null,
-                        "Position": null,
-                        "HelpText": "Add Numbers"
-                    },
-                    {
-                        "DisplayText": "Multiply",
-                        "Groups": ["Calculator"],
-                        "DotNetType": "TaskRunner.Plugin.Samples.Calculator.Multiply",
-                        "ContainerAssembly": "TaskRunner.Plugin.Samples, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-                        "InputProperties": [
-                            {"PropertyName": "Number1", "LabelText": "Number 1", "HintText": "The first number to multiply", "Required": true, "DefaultValue": "0", "PropertyValueType": "Number", "Value": null, "Reference": null, "Direction": "input"},
-                            {"PropertyName": "Number2", "LabelText": "Number 2", "HintText": "The second number to multiply", "Required": true, "DefaultValue": "0", "PropertyValueType": "Number", "Value": null, "Reference": null, "Direction": "input"},
-                            {"PropertyName": "Number3", "LabelText": "Number 2", "HintText": "The third number to multiply", "Required": false, "DefaultValue": "0", "PropertyValueType": "Number", "Value": null, "Reference": null, "Direction": "input"}
-                        ],
-                        "OutputProperties": [
-                            {"LabelText": "Result", "ShortDescription": null, "References": null ,"Direction": "output", "PropertyValueType": "Number"}
-                        ],
-                        "Id": "00000000-0000-0000-0000-000000000000",
-                        "UserGivenDisplayName": null,
-                        "Position": null,
-                        "HelpText": null
-                    },
-                    {
-                        "DisplayText": "Substract",
-                        "Groups": ["Calculator"],
-                        "DotNetType": "TaskRunner.Plugin.Samples.Calculator.Substract",
-                        "ContainerAssembly": "TaskRunner.Plugin.Samples, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-                        "InputProperties": [
-                            {"PropertyName": "Number1", "LabelText": "Number 1", "HintText": "The first number to substract from", "Required": true, "DefaultValue": "0", "PropertyValueType": "Number", "Value": null, "Reference": null, "Direction": "input"},
-                            {"PropertyName": "Number2", "LabelText": "Number 2", "HintText": "The second number to substract", "Required": true, "DefaultValue": "0", "PropertyValueType": "Number", "Value": null, "Reference": null, "Direction": "input"},
-                            {"PropertyName": "Number3", "LabelText": "Number 2", "HintText": "The third number to substract", "Required": false, "DefaultValue": "0", "PropertyValueType": "Number", "Value": null, "Reference": null, "Direction": "input"}
-                        ],
-                        "OutputProperties": [
-                            {"LabelText": "Result", "ShortDescription": null, "References": null ,"Direction": "output", "PropertyValueType": "Number"}
-                        ],
-                        "Id": "00000000-0000-0000-0000-000000000000",
-                        "UserGivenDisplayName": null,
-                        "Position": null,
-                        "HelpText": "Substract numbers"
-                    }
-                ];
-
-                return tasks;
+                return [{"DisplayText":"Add","Groups":["Calculator"],"DotNetType":"TaskRunner.Plugin.Samples.Calculator.Add","ContainerAssembly":"TaskRunner.Plugin.Samples, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","InputProperties":[{"PropertyName":"Number1","LabelText":"Number 1","HintText":"The first number to add","Required":true,"DefaultValue":"0","PropertyValueType":"Number","Value":null,"Reference":{"Key":null,"Value":null}},{"PropertyName":"Number2","LabelText":"Number 2","HintText":"The second number to add","Required":true,"DefaultValue":"0","PropertyValueType":"Number","Value":null,"Reference":{"Key":null,"Value":null}},{"PropertyName":"Number3","LabelText":"Number 2","HintText":"The third number to add","Required":false,"DefaultValue":"0","PropertyValueType":"Number","Value":null,"Reference":{"Key":null,"Value":null}}],"OutputProperties":[{"PropertyName":"Result","LabelText":"Result","ShortDescription":null,"References":null}],"HelpText":"Add Numbers"},{"DisplayText":"Multiply","Groups":["Calculator"],"DotNetType":"TaskRunner.Plugin.Samples.Calculator.Multiply","ContainerAssembly":"TaskRunner.Plugin.Samples, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","InputProperties":[{"PropertyName":"Number1","LabelText":"Number 1","HintText":"The first number to multiply","Required":true,"DefaultValue":"0","PropertyValueType":"Number","Value":null,"Reference":{"Key":null,"Value":null}},{"PropertyName":"Number2","LabelText":"Number 2","HintText":"The second number to multiply","Required":true,"DefaultValue":"0","PropertyValueType":"Number","Value":null,"Reference":{"Key":null,"Value":null}},{"PropertyName":"Number3","LabelText":"Number 2","HintText":"The third number to multiply","Required":false,"DefaultValue":"0","PropertyValueType":"Number","Value":null,"Reference":{"Key":null,"Value":null}}],"OutputProperties":[{"PropertyName":"Result","LabelText":"Result","ShortDescription":null,"References":null}],"HelpText":null},{"DisplayText":"Substract","Groups":["Calculator"],"DotNetType":"TaskRunner.Plugin.Samples.Calculator.Substract","ContainerAssembly":"TaskRunner.Plugin.Samples, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","InputProperties":[{"PropertyName":"Number1","LabelText":"Number 1","HintText":"The first number to substract from","Required":true,"DefaultValue":"0","PropertyValueType":"Number","Value":null,"Reference":{"Key":null,"Value":null}},{"PropertyName":"Number2","LabelText":"Number 2","HintText":"The second number to substract","Required":true,"DefaultValue":"0","PropertyValueType":"Number","Value":null,"Reference":{"Key":null,"Value":null}},{"PropertyName":"Number3","LabelText":"Number 2","HintText":"The third number to substract","Required":false,"DefaultValue":"0","PropertyValueType":"Number","Value":null,"Reference":{"Key":null,"Value":null}}],"OutputProperties":[{"PropertyName":"Result","LabelText":"Result","ShortDescription":null,"References":null}],"HelpText":"Substract numbers"}];
             },
-            getMockFlow: function (tasks) {
-
-                var flow = {
-                    Id: "aaf8f049-3bef-4362-ba5c-1475fde8414d",
-                    DisplayName: "Flow 1",
-                    UserId: "",
-                    Tasks: tasks,
-                    Properties: [
-                        { KEY: "VALUE" }
-                    ]
-                };
-
-                return flow;
+            getMockFlows: function () {
+                return [{"Id":"5a747da3-c362-45c3-ac5d-9bd0d71ab832","DisplayName":"DummyFlow1","UserName":"3AMLABS\\gmeszaros","Tasks":[{"DisplayText":"Add","Groups":["Calculator"],"DotNetType":"TaskRunner.Plugin.Samples.Calculator.Add","ContainerAssembly":"TaskRunner.Plugin.Samples, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","InputProperties":[{"PropertyName":"Number1","LabelText":"Number 1","HintText":"The first number to add","Required":true,"DefaultValue":"10","PropertyValueType":"Number","Value":null,"Reference":{"Key":null,"Value":null}},{"PropertyName":"Number2","LabelText":"Number 2","HintText":"The second number to add","Required":true,"DefaultValue":"20","PropertyValueType":"Number","Value":null,"Reference":{"Key":null,"Value":null}},{"PropertyName":"Number3","LabelText":"Number 2","HintText":"The third number to add","Required":false,"DefaultValue":"30","PropertyValueType":"Number","Value":null,"Reference":{"Key":null,"Value":null}}],"OutputProperties":[{"PropertyName":"Result","LabelText":"Result","ShortDescription":null,"References":{"06fcb0b8-cc71-43be-bd13-c95462ff9726":["Number1","Number2"]}}],"Id":"c4bf0748-8896-4a7f-93b9-50d9704045e8","UserGivenDisplayName":null,"Position":null,"HelpText":"Add Numbers"},{"DisplayText":"Multiply","Groups":["Calculator"],"DotNetType":"TaskRunner.Plugin.Samples.Calculator.Multiply","ContainerAssembly":"TaskRunner.Plugin.Samples, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","InputProperties":[{"PropertyName":"Number1","LabelText":"Number 1","HintText":"The first number to multiply","Required":true,"DefaultValue":"0","PropertyValueType":"Number","Value":null,"Reference":{"Key":"c4bf0748-8896-4a7f-93b9-50d9704045e8","Value":"Result"}},{"PropertyName":"Number2","LabelText":"Number 2","HintText":"The second number to multiply","Required":true,"DefaultValue":"0","PropertyValueType":"Number","Value":null,"Reference":{"Key":"c4bf0748-8896-4a7f-93b9-50d9704045e8","Value":"Result"}},{"PropertyName":"Number3","LabelText":"Number 2","HintText":"The third number to multiply","Required":false,"DefaultValue":"0","PropertyValueType":"Number","Value":null,"Reference":{"Key":null,"Value":null}}],"OutputProperties":[{"PropertyName":"Result","LabelText":"Result","ShortDescription":null,"References":{"1dc452a5-8604-4ec5-90c3-d1e22197b8c8":["Number1","Number2","Number3"]}}],"Id":"06fcb0b8-cc71-43be-bd13-c95462ff9726","UserGivenDisplayName":null,"Position":null,"HelpText":null},{"DisplayText":"Substract","Groups":["Calculator"],"DotNetType":"TaskRunner.Plugin.Samples.Calculator.Substract","ContainerAssembly":"TaskRunner.Plugin.Samples, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","InputProperties":[{"PropertyName":"Number1","LabelText":"Number 1","HintText":"The first number to substract from","Required":true,"DefaultValue":"0","PropertyValueType":"Number","Value":null,"Reference":{"Key":"06fcb0b8-cc71-43be-bd13-c95462ff9726","Value":"Result"}},{"PropertyName":"Number2","LabelText":"Number 2","HintText":"The second number to substract","Required":true,"DefaultValue":"0","PropertyValueType":"Number","Value":null,"Reference":{"Key":"06fcb0b8-cc71-43be-bd13-c95462ff9726","Value":"Result"}},{"PropertyName":"Number3","LabelText":"Number 2","HintText":"The third number to substract","Required":false,"DefaultValue":"0","PropertyValueType":"Number","Value":null,"Reference":{"Key":"06fcb0b8-cc71-43be-bd13-c95462ff9726","Value":"Result"}}],"OutputProperties":[{"PropertyName":"Result","LabelText":"Result","ShortDescription":null,"References":null}],"Id":"1dc452a5-8604-4ec5-90c3-d1e22197b8c8","UserGivenDisplayName":null,"Position":null,"HelpText":"Substract numbers"}],"Properties":{"$dev-server-address$":"lmi-dev.3amlabs.net","$live-server-address$":"live.3amlabs.net","$stage-server-address$":"lminext1.3amlabs.net"}},{"Id":"2aaa14c9-3ffa-4eb4-b4e0-bbd1fdb7d253","DisplayName":"DummyFlow2","UserName":"3AMLABS\\gmeszaros","Tasks":[{"DisplayText":"Add","Groups":["Calculator"],"DotNetType":"TaskRunner.Plugin.Samples.Calculator.Add","ContainerAssembly":"TaskRunner.Plugin.Samples, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","InputProperties":[{"PropertyName":"Number1","LabelText":"Number 1","HintText":"The first number to add","Required":true,"DefaultValue":"400","PropertyValueType":"Number","Value":null,"Reference":{"Key":null,"Value":null}},{"PropertyName":"Number2","LabelText":"Number 2","HintText":"The second number to add","Required":true,"DefaultValue":"500","PropertyValueType":"Number","Value":null,"Reference":{"Key":null,"Value":null}},{"PropertyName":"Number3","LabelText":"Number 2","HintText":"The third number to add","Required":false,"DefaultValue":"600","PropertyValueType":"Number","Value":null,"Reference":{"Key":null,"Value":null}}],"OutputProperties":[{"PropertyName":"Result","LabelText":"Result","ShortDescription":null,"References":{"06fcb0b8-cc71-43be-bd13-c95462ff9726":["Number1","Number2","Number3"]}}],"Id":"c4bf0748-8896-4a7f-93b9-50d9704045e8","UserGivenDisplayName":null,"Position":null,"HelpText":"Add Numbers"},{"DisplayText":"Multiply","Groups":["Calculator"],"DotNetType":"TaskRunner.Plugin.Samples.Calculator.Multiply","ContainerAssembly":"TaskRunner.Plugin.Samples, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","InputProperties":[{"PropertyName":"Number1","LabelText":"Number 1","HintText":"The first number to multiply","Required":true,"DefaultValue":"0","PropertyValueType":"Number","Value":null,"Reference":{"Key":"c4bf0748-8896-4a7f-93b9-50d9704045e8","Value":"Result"}},{"PropertyName":"Number2","LabelText":"Number 2","HintText":"The second number to multiply","Required":true,"DefaultValue":"0","PropertyValueType":"Number","Value":null,"Reference":{"Key":"c4bf0748-8896-4a7f-93b9-50d9704045e8","Value":"Result"}},{"PropertyName":"Number3","LabelText":"Number 2","HintText":"The third number to multiply","Required":false,"DefaultValue":"0","PropertyValueType":"Number","Value":null,"Reference":{"Key":"c4bf0748-8896-4a7f-93b9-50d9704045e8","Value":"Result"}}],"OutputProperties":[{"PropertyName":"Result","LabelText":"Result","ShortDescription":null,"References":{"1dc452a5-8604-4ec5-90c3-d1e22197b8c8":["Number1","Number2"]}}],"Id":"06fcb0b8-cc71-43be-bd13-c95462ff9726","UserGivenDisplayName":null,"Position":null,"HelpText":null},{"DisplayText":"Substract","Groups":["Calculator"],"DotNetType":"TaskRunner.Plugin.Samples.Calculator.Substract","ContainerAssembly":"TaskRunner.Plugin.Samples, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null","InputProperties":[{"PropertyName":"Number1","LabelText":"Number 1","HintText":"The first number to substract from","Required":true,"DefaultValue":"0","PropertyValueType":"Number","Value":null,"Reference":{"Key":"06fcb0b8-cc71-43be-bd13-c95462ff9726","Value":"Result"}},{"PropertyName":"Number2","LabelText":"Number 2","HintText":"The second number to substract","Required":true,"DefaultValue":"0","PropertyValueType":"Number","Value":null,"Reference":{"Key":"06fcb0b8-cc71-43be-bd13-c95462ff9726","Value":"Result"}},{"PropertyName":"Number3","LabelText":"Number 2","HintText":"The third number to substract","Required":false,"DefaultValue":"0","PropertyValueType":"Number","Value":null,"Reference":{"Key":null,"Value":null}}],"OutputProperties":[{"PropertyName":"Result","LabelText":"Result","ShortDescription":null,"References":null}],"Id":"1dc452a5-8604-4ec5-90c3-d1e22197b8c8","UserGivenDisplayName":null,"Position":null,"HelpText":"Substract numbers"}],"Properties":{"$dev-server-address$":"lmi-dev.3amlabs.net","$live-server-address$":"live.3amlabs.net","$stage-server-address$":"lminext1.3amlabs.net"}}];
             }
         };
     }]);
 angular.module('TaskRunner')
-    .service('mainService', ['$q', 'mockService', function ($q, $mock) {
+    .service('mainService', ['$q', '$http', 'mockService', function ($q, $http, $mock) {
+        var _serverUrl = 'http://gmeszaros.3amlabs.net/Api';
+        var _data = {
+            userInfo: {"UserName":"3AMLABS\\gmeszaros","FirstName":"Istvan","LastName":"Madarasz","Settings":null},
+            flows: [],
+            tasks: []
+        };
         return{
+            data: _data,
             getFlows: function () {
-                var flow1 = $mock.getMockFlow($mock.getMockTasks());
-                var flow2 = angular.copy(flow1);
-                flow2.Id = "c02a9ab1-9a03-4f33-80a5-18b2470ebfdd";
-                flow2.DisplayName = "Flow 2";
-                var flow3 = angular.copy(flow1);
-                flow3.Id = "7573a265-2ed2-42ea-9ab5-8ee203c1a01b";
-                flow3.DisplayName = "Flow 3";
-                return [ flow1, flow2, flow3 ];
+                $http.get(_serverUrl + "/flow/getflows").success(function (flows) {
+                    _data.flows = flows;
+                });
             },
             getFlow: function () {
                 return $mock.getMockFlow($mock.getMockTasks());
             },
-            getToolBoxItems: function () {
-                var task1 = {
-                    Id: "4518985f-c78d-464c-8b28-ff34400df69d",
-                    Namespace: "SampleNamespace",
-                    FullType: "SampleTaskType1",
-                    DisplayName: "Sample task 1",
-                    InputProperties: [
-                        {
-                            Name: "sampleInput1",
-                            Direction: 'input',
-                            DefaultValue: 'DefaultValue',
-                            Required: true,
-                            Type: "string",
-                            Value: "",
-                            References: [ ]
-                        }
-                    ],
-                    OutputProperties: [
-                        {
-                            Name: "sampleOutput",
-                            Direction: 'output',
-                            DefaultValue: 'someVal',
-                            Required: true,
-                            Type: "string",
-                            Value: "",
-                            References: [ ]
-                        }
-                    ]
-                };
-
-                var task2 = {
-                    Id: "0def21da-4046-4ed8-9748-4e9e20b970dd",
-                    Namespace: "SampleNamespace",
-                    FullType: "SampleTaskType1",
-                    DisplayName: "Sample task 1",
-                    InputProperties: [
-                        {
-                            Name: "sampleInput1",
-                            Direction: 'input',
-                            DefaultValue: 'DefaultValue',
-                            Required: true,
-                            Type: "string",
-                            Value: "",
-                            References: [ ]
-                        }
-                    ],
-                    OutputProperties: [
-                        {
-                            Name: "sampleOutput",
-                            Direction: 'output',
-                            DefaultValue: 'someVal',
-                            Required: true,
-                            Type: "string",
-                            Value: "",
-                            References: [ ]
-                        }
-                    ]
-                };
-
-                return [ task1, task2 ];
+            getUser: function () {
+                $http.jsonp(_serverUrl + "/user/getsettings").success(function (userInfo) {
+                    _data.userInfo = userInfo;
+                });
+            },
+            getTasks: function () {
+                $http.get(_serverUrl + "/task/gettasks").success(function (tasks) {
+                    _data.tasks = tasks;
+                });
             }
         };
     }]);

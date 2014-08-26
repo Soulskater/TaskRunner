@@ -60,7 +60,8 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
             templateUrl: 'js/directives/editor/templates/editor.tmpl.html',
             scope: {
                 autoSize: '=',
-                items: '='
+                items: '=',
+                selectedChanged: '&'
             },
             controller: 'editorController',
             link: function ($scope, element, attrs) {
@@ -79,6 +80,9 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
                  $scope.width = element.parent().width();
                  $scope.height = element.parent().height() - element.parent().offset().top;
                  }*/
+                $scope.$watch("items", function () {
+                    $scope.renderItems();
+                });
 
                 $scope.$on('itemAdded', function (event, sampleItem, mouseEvent) {
                     $scope.$apply(function () {
@@ -100,6 +104,7 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
                         $scope.items[i].selected = false;
                     }
                     item.selected = true;
+                    $scope.selectedChanged({task: item});
                 };
                 $scope.onDragItem = function (item, event) {
                     $scope.$apply(function () {
@@ -122,7 +127,6 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
             require: '^editor',
             replace: true,
             templateUrl: 'js/directives/editor/templates/item.tmpl.html',
-            type: 'svg',
             transclude: true,
             scope: {
                 width: "=",
@@ -151,7 +155,7 @@ angular.module('TaskRunner.Directive.Editor', ['TaskRunner.Directive'])
     }])
     .directive('title', [function () {
         return{
-            restrict: "AE",
+            restrict: "E",
             replace: true,
             template: '<div class="font-s box-header" ng-transclude></div>',
             transclude: true,

@@ -169,18 +169,25 @@
 .dock-control .dock-panel.collapsed .dock-panel-title {
   border-bottom: none;
 }
-.dock-control .dock-panel .dock-panel-title {
-  color: #ffffff;
-  padding: 1px 15px 1px 15px;
-  border-bottom: 1px solid #007acb;
-}
-.dock-control .dock-panel .dock-container {
+.dock-control .dock-panel .dock-wrapper {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  overflow: hidden;
+}
+.dock-control .dock-panel .dock-content {
+  position: absolute;
+  top: 30px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: auto;
+}
+.dock-control .dock-panel .dock-panel-title {
+  color: #ffffff;
+  padding: 1px 5px 1px 5px;
+  border-bottom: 1px solid #007acb;
 }
 .dock-control .splitter {
   width: 5px;

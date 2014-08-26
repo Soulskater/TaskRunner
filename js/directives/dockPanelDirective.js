@@ -18,7 +18,7 @@ angular.module('TaskRunner.Directive.DockPanel', [])
             },
             template: '<div class="{{ \'dock-panel \' + dockStyle}}" ng-class="{ collapsed: isCollapsed }">' +
                 '<dock-splitter ng-if="showSplitter != false"></dock-splitter>' +
-                '<div class="dock-container" ng-transclude>' +
+                '<div class="dock-wrapper" ng-transclude>' +
                 '</div>',
             controller: function ($scope) {
                 this.onDragging = function (event) {
@@ -35,7 +35,7 @@ angular.module('TaskRunner.Directive.DockPanel', [])
                 var watcher = scope.$watch("isCollapsed", function () {
                     $timeout(function () {
                         refreshSize();
-                    }, 200);
+                    }, 250);
                 });
 
                 var horizontal = scope.dockStyle === 'left' || scope.dockStyle === 'right';
@@ -83,9 +83,9 @@ angular.module('TaskRunner.Directive.DockPanel', [])
                     }
                 }, 10);
                 scope.onDragging = function (event) {
+                    if (scope.isCollapsed) return;
                     var bounds = element[0].getBoundingClientRect();
                     var pos = 0;
-                    console.log("Drag!");
                     switch (scope.dockStyle) {
                         case "left":
                             pos = event.gesture.center.x - element.width();
